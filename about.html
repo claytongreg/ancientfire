@@ -7,19 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
-<style type="text/tailwindcss">
-  @theme {
-    --color-background: hsl(201 100% 13%);
-    --color-foreground: hsl(0 0% 100%);
-    --color-muted-foreground: hsl(240 4% 66%);
-    --color-primary: hsl(0 0% 100%);
-    --color-primary-foreground: hsl(0 0% 4%);
-    --color-border: hsl(0 0% 18%);
-    --font-display: 'Instrument Serif', serif;
-    --font-body: 'Inter', sans-serif;
-  }
-</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        background: 'hsl(201 100% 13%)',
+        foreground: 'hsl(0 0% 100%)',
+        'muted-foreground': 'hsl(240 4% 66%)',
+        primary: 'hsl(0 0% 100%)',
+        'primary-foreground': 'hsl(0 0% 4%)',
+        border: 'hsl(0 0% 18%)',
+      },
+      fontFamily: {
+        display: ["'Instrument Serif'", 'serif'],
+        body: ["'Inter'", 'sans-serif'],
+      },
+    },
+  },
+}
+</script>
 <style>
   :root {
     --background: 201 100% 13%;
