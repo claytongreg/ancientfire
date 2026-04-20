@@ -7,28 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        background: 'hsl(201 100% 13%)',
-        foreground: 'hsl(0 0% 100%)',
-        'muted-foreground': 'hsl(240 4% 66%)',
-        border: 'hsl(0 0% 18%)',
-      },
-      fontFamily: {
-        display: ["'Instrument Serif'", 'serif'],
-        body: ["'Inter'", 'sans-serif'],
-      },
-    },
-  },
-}
-</script>
+<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: hsl(24 8% 10%);
+    --color-foreground: hsl(0 0% 100%);
+    --color-muted-foreground: hsl(240 4% 66%);
+    --color-border: hsl(0 0% 18%);
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+</style>
 <style>
   :root {
-    --background: 201 100% 13%;
+    --background: 24 8% 10%;
     --foreground: 0 0% 100%;
     --muted-foreground: 240 4% 66%;
     --border: 0 0% 18%;
@@ -45,9 +37,9 @@ tailwind.config = {
     background:
       radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
       radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
-      radial-gradient(ellipse at 20% 10%, hsla(201, 80%, 22%, 0.6) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 15%, hsla(210, 60%, 16%, 0.7) 0%, transparent 60%),
-      linear-gradient(180deg, hsl(201 100% 10%) 0%, hsl(201 100% 13%) 45%, hsl(12 40% 8%) 100%);
+      radial-gradient(ellipse at 20% 10%, hsla(24, 10%, 16%, 0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, hsla(24, 8%, 12%, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, hsl(24 8% 8%) 0%, hsl(24 8% 10%) 45%, hsl(12 40% 8%) 100%);
   }
   .ember-grain {
     position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -116,7 +108,7 @@ tailwind.config = {
     background:
       radial-gradient(ellipse at 50% 65%, hsla(22, 85%, 45%, 0.55) 0%, transparent 55%),
       radial-gradient(ellipse at 50% 40%, hsla(14, 60%, 25%, 0.6) 0%, transparent 60%),
-      linear-gradient(180deg, hsl(12 35% 10%) 0%, hsl(201 55% 8%) 100%);
+      linear-gradient(180deg, hsl(12 35% 10%) 0%, hsl(24 8% 8%) 100%);
   }
   .portrait::before {
     content: ''; position: absolute; inset: 0;
@@ -187,7 +179,7 @@ tailwind.config = {
     </nav>
 
     <!-- HEADER -->
-    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-20 text-center">
+    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-14 text-center">
       <div class="animate-fade-rise section-eyebrow mb-8">Who We Are</div>
 
       <h1 class="animate-fade-rise-1 font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
@@ -201,49 +193,52 @@ tailwind.config = {
       </p>
     </header>
 
+    <!-- SHARED PORTRAIT -->
+    <section class="max-w-6xl mx-auto px-8 pt-8 pb-16 animate-fade-rise-2">
+      <figure class="relative overflow-hidden" style="border-radius: 4px;">
+        <img src="images/jesse_amber.jpeg" alt="Amber and Jesse Blue"
+             class="w-full h-auto block"
+             style="object-fit: cover; max-height: 78vh;"/>
+        <figcaption class="absolute left-5 bottom-4 z-10 text-xs"
+                    style="font-family: ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
+          Amber &amp; Jesse Blue · Salt Spring Island
+        </figcaption>
+      </figure>
+    </section>
+
     <div class="max-w-6xl mx-auto px-8">
       <div class="hairline"></div>
     </div>
 
     <!-- JESSE -->
-    <section class="max-w-6xl mx-auto px-8 py-24">
-      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+    <section class="max-w-4xl mx-auto px-8 py-24">
+      <div class="animate-fade-rise-3">
+        <div class="meta-label mb-5">Founder</div>
+        <h2 class="text-5xl sm:text-6xl md:text-7xl text-foreground mb-12"
+            style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
+          Jesse <em class="not-italic text-muted-foreground">Blue.</em>
+        </h2>
 
-        <div class="md:col-span-5 animate-fade-rise-2">
-          <div class="portrait">
-            <div class="portrait-caption">jesse_amber</div>
-            <div class="portrait-label">portrait · jesse blue</div>
-          </div>
+        <div class="prose-body max-w-2xl">
+          <p>
+            Jesse has been a professional <span class="hl">stunt performer since 2011</span>. He has doubled the likes of Jensen Ackles on <em>Supernatural</em> as Dean Winchester for eight years — alongside Dougray Scott on <em>Batwoman</em>, Clive Standen, Kevin Alejandro, Jonathan Scarfe, and Sam Jaeger, to name a few.
+          </p>
+          <p>
+            He's performed action roles in <em>Altered Carbon, Arrow, Supergirl, The Flash, Legends of Tomorrow, The 100, Van Helsing, Snowpiercer, Riverdale, Tracker, Fire Country, The Last of Us</em> — and more.
+          </p>
+          <p>
+            Recently he's picked up the torch of <span class="hl">stunt coordinator</span> on feature films <em>Viper</em>, <em>A Way Out</em>, and <em>The Stick Indian</em>. His true passion lies in fight coordinating — his entry into stunts came from over <span class="hl">thirty years</span> of martial arts practice.
+          </p>
+          <p>
+            His dedication to sharing martial arts, breathwork, meditation, and holistic healing conceived Ancient Fire: a gathering place and school of mastery for students of life and teachers from around the world. The school originally found home in the Olympic Village of Vancouver, and has since evolved into an ever-growing retreat centre on Salt Spring Island.
+          </p>
         </div>
 
-        <div class="md:col-span-7 animate-fade-rise-3">
-          <div class="meta-label mb-5">Founder</div>
-          <h2 class="text-5xl sm:text-6xl text-foreground mb-10"
-              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
-            Jesse <em class="not-italic text-muted-foreground">Blue.</em>
-          </h2>
-
-          <div class="prose-body max-w-xl">
-            <p>
-              Jesse has been a professional <span class="hl">stunt performer since 2011</span>. He has doubled the likes of Jensen Ackles on <em>Supernatural</em> as Dean Winchester for eight years — alongside Dougray Scott on <em>Batwoman</em>, Clive Standen, Kevin Alejandro, Jonathan Scarfe, and Sam Jaeger, to name a few.
-            </p>
-            <p>
-              He's performed action roles in <em>Altered Carbon, Arrow, Supergirl, The Flash, Legends of Tomorrow, The 100, Van Helsing, Snowpiercer, Riverdale, Tracker, Fire Country, The Last of Us</em> — and more.
-            </p>
-            <p>
-              Recently he's picked up the torch of <span class="hl">stunt coordinator</span> on feature films <em>Viper</em>, <em>A Way Out</em>, and <em>The Stick Indian</em>. His true passion lies in fight coordinating — his entry into stunts came from over <span class="hl">thirty years</span> of martial arts practice.
-            </p>
-            <p>
-              His dedication to sharing martial arts, breathwork, meditation, and holistic healing conceived Ancient Fire: a gathering place and school of mastery for students of life and teachers from around the world. The school originally found home in the Olympic Village of Vancouver, and has since evolved into an ever-growing retreat centre on Salt Spring Island.
-            </p>
-          </div>
-
-          <div class="mt-12 pl-6 border-l border-white/20">
-            <p class="pullquote">
-              "Impossible is <em>nothing.</em>"
-            </p>
-            <p class="mt-3 meta-label">— Jesse Blue, One Tribe</p>
-          </div>
+        <div class="mt-12 pl-6 border-l border-white/20">
+          <p class="pullquote">
+            "Impossible is <em>nothing.</em>"
+          </p>
+          <p class="mt-3 meta-label">— Jesse Blue, One Tribe</p>
         </div>
       </div>
     </section>
@@ -253,42 +248,31 @@ tailwind.config = {
     </div>
 
     <!-- AMBER -->
-    <section class="max-w-6xl mx-auto px-8 py-24">
-      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+    <section class="max-w-4xl mx-auto px-8 py-24">
+      <div class="animate-fade-rise-3">
+        <div class="meta-label mb-5">Director</div>
+        <h2 class="text-5xl sm:text-6xl md:text-7xl text-foreground mb-12"
+            style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
+          Amber <em class="not-italic text-muted-foreground">Blue.</em>
+        </h2>
 
-        <!-- Reverse order on desktop: text left, portrait right -->
-        <div class="md:col-span-7 md:order-1 animate-fade-rise-3">
-          <div class="meta-label mb-5">Director</div>
-          <h2 class="text-5xl sm:text-6xl text-foreground mb-10"
-              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
-            Amber <em class="not-italic text-muted-foreground">Blue.</em>
-          </h2>
-
-          <div class="prose-body max-w-xl">
-            <p>
-              Amber has spent <span class="hl">almost 20 years</span> immersed in the practice of breathwork. She is a Certified Shamanic Minister, and is trained in many breathwork modalities.
-            </p>
-            <p>
-              Dedicated to sharing the profound medicine of breathwork with those willing to undertake the courageous journey of self-discovery, she brings her experience of <span class="hl">ceremony and sacred medicine circle</span> to her services.
-            </p>
-            <p>
-              Amber offers private sessions for individuals, couples, and groups.
-            </p>
-          </div>
-
-          <div class="mt-12 pl-6 border-l border-white/20">
-            <p class="pullquote">
-              <em>"The breath is the bridge —</em><br/>
-              it carries us home."
-            </p>
-          </div>
+        <div class="prose-body max-w-2xl">
+          <p>
+            Amber has spent <span class="hl">almost 20 years</span> immersed in the practice of breathwork. She is a Certified Shamanic Minister, and is trained in many breathwork modalities.
+          </p>
+          <p>
+            Dedicated to sharing the profound medicine of breathwork with those willing to undertake the courageous journey of self-discovery, she brings her experience of <span class="hl">ceremony and sacred medicine circle</span> to her services.
+          </p>
+          <p>
+            Amber offers private sessions for individuals, couples, and groups.
+          </p>
         </div>
 
-        <div class="md:col-span-5 md:order-2 animate-fade-rise-2">
-          <div class="portrait" style="background: radial-gradient(ellipse at 50% 60%, hsla(28, 75%, 45%, 0.5) 0%, transparent 55%), radial-gradient(ellipse at 50% 35%, hsla(14, 55%, 22%, 0.6) 0%, transparent 60%), linear-gradient(180deg, hsl(14 30% 11%) 0%, hsl(201 50% 8%) 100%);">
-            <div class="portrait-caption">amber</div>
-            <div class="portrait-label">portrait · amber blue</div>
-          </div>
+        <div class="mt-12 pl-6 border-l border-white/20">
+          <p class="pullquote">
+            <em>"The breath is the bridge —</em><br/>
+            it carries us home."
+          </p>
         </div>
       </div>
     </section>
@@ -299,7 +283,7 @@ tailwind.config = {
 
       <p class="animate-fade-rise text-4xl sm:text-5xl md:text-6xl text-muted-foreground leading-[1.15]"
          style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
-        Ready to sit by the fire?
+        Ready to awaken the inner fire?
       </p>
       <p class="animate-fade-rise-1 mt-4 text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.15]"
          style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
