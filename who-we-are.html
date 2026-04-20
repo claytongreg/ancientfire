@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancient Fire — Who We Are</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: hsl(201 100% 13%);
+    --color-foreground: hsl(0 0% 100%);
+    --color-muted-foreground: hsl(240 4% 66%);
+    --color-border: hsl(0 0% 18%);
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+</style>
+<style>
+  :root {
+    --background: 201 100% 13%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 240 4% 66%;
+    --border: 0 0% 18%;
+  }
+  html, body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .ember-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse at 20% 10%, hsla(201, 80%, 22%, 0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, hsla(210, 60%, 16%, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, hsl(201 100% 10%) 0%, hsl(201 100% 13%) 45%, hsl(12 40% 8%) 100%);
+  }
+  .ember-grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.04; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease; cursor: pointer;
+    color: hsl(0 0% 100%);
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); }
+
+  @keyframes fade-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-rise   { animation: fade-rise 0.9s ease-out both; }
+  .animate-fade-rise-1 { animation: fade-rise 0.9s ease-out 0.15s both; }
+  .animate-fade-rise-2 { animation: fade-rise 0.9s ease-out 0.3s both; }
+  .animate-fade-rise-3 { animation: fade-rise 0.9s ease-out 0.45s both; }
+  .animate-fade-rise-4 { animation: fade-rise 0.9s ease-out 0.6s both; }
+
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fade-in 1.2s ease-out both; }
+
+  @keyframes ember-flicker {
+    0%, 100% { opacity: 0.85; }
+    40% { opacity: 1; } 60% { opacity: 0.7; }
+  }
+  .ember-flicker { animation: ember-flicker 5.5s ease-in-out infinite; }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+  }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .meta-label {
+    font-size: 10px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: hsl(var(--muted-foreground));
+  }
+
+  /* Portrait frame: warm monochrome placeholder with ember gradient. Swap later for real images. */
+  .portrait {
+    position: relative; overflow: hidden; border-radius: 4px;
+    aspect-ratio: 4 / 5;
+    background:
+      radial-gradient(ellipse at 50% 65%, hsla(22, 85%, 45%, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 40%, hsla(14, 60%, 25%, 0.6) 0%, transparent 60%),
+      linear-gradient(180deg, hsl(12 35% 10%) 0%, hsl(201 55% 8%) 100%);
+  }
+  .portrait::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
+    mix-blend-mode: overlay; opacity: 0.65;
+  }
+  .portrait::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.55) 100%);
+  }
+  .portrait-label {
+    position: absolute; bottom: 14px; left: 16px; z-index: 2;
+    font-family: ui-monospace, monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+  .portrait-caption {
+    position: absolute; top: 16px; left: 18px; z-index: 2;
+    font-family: ui-monospace, monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .prose-body p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: hsl(var(--muted-foreground));
+  }
+  .prose-body p + p { margin-top: 1.25rem; }
+  .prose-body p strong, .prose-body p .hl { color: hsl(0 0% 100%); font-weight: 400; }
+
+  .pullquote {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: hsl(0 0% 100%);
+    letter-spacing: -0.5px;
+  }
+  .pullquote em { font-style: normal; color: hsl(var(--muted-foreground)); }
+</style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+  <div class="ember-bg" aria-hidden="true"></div>
+  <div class="ember-grain ember-flicker" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full">
+
+    <!-- NAV -->
+    <nav class="animate-fade-in">
+      <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
+        <a href="/" class="text-3xl tracking-tight text-foreground leading-none" style="font-family: 'Instrument Serif', serif;">
+          Ancient Fire
+        </a>
+
+        <div class="hidden md:flex items-center gap-10">
+          <a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <a href="/offerings" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Offerings</a>
+          <a href="/about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+          <a href="#" class="text-sm text-foreground transition-colors">Who We Are</a>
+          <a href="#" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
+        </div>
+
+        <button class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground">
+          Begin Journey
+        </button>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-20 text-center">
+      <div class="animate-fade-rise section-eyebrow mb-8">Who We Are</div>
+
+      <h1 class="animate-fade-rise-1 font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
+          style="font-family: 'Instrument Serif', serif; line-height: 0.95; letter-spacing: -2.46px;">
+        The <em class="not-italic text-muted-foreground">hands</em> that<br class="hidden sm:block"/>
+        tend the <em class="not-italic text-muted-foreground">fire.</em>
+      </h1>
+
+      <p class="animate-fade-rise-2 mt-10 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        A couple of transformation and vision — stewards of ceremony, movement, and the quiet work of return. Together, they hold Ancient Fire.
+      </p>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="hairline"></div>
+    </div>
+
+    <!-- JESSE -->
+    <section class="max-w-6xl mx-auto px-8 py-24">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+
+        <div class="md:col-span-5 animate-fade-rise-2">
+          <div class="portrait">
+            <div class="portrait-caption">jesse_amber</div>
+            <div class="portrait-label">portrait · jesse blue</div>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 animate-fade-rise-3">
+          <div class="meta-label mb-5">Founder</div>
+          <h2 class="text-5xl sm:text-6xl text-foreground mb-10"
+              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
+            Jesse <em class="not-italic text-muted-foreground">Blue.</em>
+          </h2>
+
+          <div class="prose-body max-w-xl">
+            <p>
+              Jesse has been a professional <span class="hl">stunt performer since 2011</span>. He has doubled the likes of Jensen Ackles on <em>Supernatural</em> as Dean Winchester for eight years — alongside Dougray Scott on <em>Batwoman</em>, Clive Standen, Kevin Alejandro, Jonathan Scarfe, and Sam Jaeger, to name a few.
+            </p>
+            <p>
+              He's performed action roles in <em>Altered Carbon, Arrow, Supergirl, The Flash, Legends of Tomorrow, The 100, Van Helsing, Snowpiercer, Riverdale, Tracker, Fire Country, The Last of Us</em> — and more.
+            </p>
+            <p>
+              Recently he's picked up the torch of <span class="hl">stunt coordinator</span> on feature films <em>Viper</em>, <em>A Way Out</em>, and <em>The Stick Indian</em>. His true passion lies in fight coordinating — his entry into stunts came from over <span class="hl">thirty years</span> of martial arts practice.
+            </p>
+            <p>
+              His dedication to sharing martial arts, breathwork, meditation, and holistic healing conceived Ancient Fire: a gathering place and school of mastery for students of life and teachers from around the world. The school originally found home in the Olympic Village of Vancouver, and has since evolved into an ever-growing retreat centre on Salt Spring Island.
+            </p>
+          </div>
+
+          <div class="mt-12 pl-6 border-l border-white/20">
+            <p class="pullquote">
+              "Impossible is <em>nothing.</em>"
+            </p>
+            <p class="mt-3 meta-label">— Jesse Blue, One Tribe</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="hairline"></div>
+    </div>
+
+    <!-- AMBER -->
+    <section class="max-w-6xl mx-auto px-8 py-24">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+
+        <!-- Reverse order on desktop: text left, portrait right -->
+        <div class="md:col-span-7 md:order-1 animate-fade-rise-3">
+          <div class="meta-label mb-5">Director</div>
+          <h2 class="text-5xl sm:text-6xl text-foreground mb-10"
+              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1.2px;">
+            Amber <em class="not-italic text-muted-foreground">Blue.</em>
+          </h2>
+
+          <div class="prose-body max-w-xl">
+            <p>
+              Amber has spent <span class="hl">almost 20 years</span> immersed in the practice of breathwork. She is a Certified Shamanic Minister, and is trained in many breathwork modalities.
+            </p>
+            <p>
+              Dedicated to sharing the profound medicine of breathwork with those willing to undertake the courageous journey of self-discovery, she brings her experience of <span class="hl">ceremony and sacred medicine circle</span> to her services.
+            </p>
+            <p>
+              Amber offers private sessions for individuals, couples, and groups.
+            </p>
+          </div>
+
+          <div class="mt-12 pl-6 border-l border-white/20">
+            <p class="pullquote">
+              <em>"The breath is the bridge —</em><br/>
+              it carries us home."
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 md:order-2 animate-fade-rise-2">
+          <div class="portrait" style="background: radial-gradient(ellipse at 50% 60%, hsla(28, 75%, 45%, 0.5) 0%, transparent 55%), radial-gradient(ellipse at 50% 35%, hsla(14, 55%, 22%, 0.6) 0%, transparent 60%), linear-gradient(180deg, hsl(14 30% 11%) 0%, hsl(201 50% 8%) 100%);">
+            <div class="portrait-caption">amber</div>
+            <div class="portrait-label">portrait · amber blue</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVITATION -->
+    <section class="max-w-4xl mx-auto px-8 pt-16 pb-24 text-center">
+      <div class="hairline mb-16"></div>
+
+      <p class="animate-fade-rise text-4xl sm:text-5xl md:text-6xl text-muted-foreground leading-[1.15]"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+        Ready to sit by the fire?
+      </p>
+      <p class="animate-fade-rise-1 mt-4 text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.15]"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+        Come <em class="not-italic text-muted-foreground">find us.</em>
+      </p>
+
+      <div class="animate-fade-rise-2 mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/offerings"
+           class="liquid-glass inline-block rounded-full px-10 py-4 text-base text-foreground"
+           style="text-decoration: none;">
+          See the Offerings
+        </a>
+        <a href="mailto:info@ancientfire.ca"
+           class="inline-block px-8 py-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
+           style="letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;">
+          info@ancientfire.ca →
+        </a>
+      </div>
+    </section>
+
+    <footer class="max-w-3xl mx-auto px-8 pt-8 pb-20 text-center">
+      <div class="hairline mb-12"></div>
+      <p class="text-xs sm:text-sm uppercase text-muted-foreground/80 leading-relaxed"
+         style="letter-spacing: 0.22em;">
+        Ancient Fire · Salt Spring Island <br class="hidden sm:block"/>
+        We acknowledge the traditional territories of the Coast Salish Peoples.
+      </p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

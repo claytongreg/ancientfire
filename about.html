@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancient Fire — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: hsl(201 100% 13%);
+    --color-foreground: hsl(0 0% 100%);
+    --color-muted-foreground: hsl(240 4% 66%);
+    --color-primary: hsl(0 0% 100%);
+    --color-primary-foreground: hsl(0 0% 4%);
+    --color-border: hsl(0 0% 18%);
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+</style>
+<style>
+  :root {
+    --background: 201 100% 13%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 240 4% 66%;
+    --border: 0 0% 18%;
+  }
+
+  html, body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ambient ember backdrop — static, low-motion, thematically aligned with the hero video */
+  .ember-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse at 20% 10%, hsla(201, 80%, 22%, 0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, hsla(210, 60%, 16%, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, hsl(201 100% 10%) 0%, hsl(201 100% 13%) 45%, hsl(12 40% 8%) 100%);
+  }
+  .ember-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Liquid glass (matches hero) */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    color: hsl(0 0% 100%);
+  }
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); }
+
+  /* Animations */
+  @keyframes fade-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-rise      { animation: fade-rise 0.9s ease-out both; }
+  .animate-fade-rise-1    { animation: fade-rise 0.9s ease-out 0.15s both; }
+  .animate-fade-rise-2    { animation: fade-rise 0.9s ease-out 0.3s both; }
+  .animate-fade-rise-3    { animation: fade-rise 0.9s ease-out 0.45s both; }
+  .animate-fade-rise-4    { animation: fade-rise 0.9s ease-out 0.6s both; }
+  .animate-fade-rise-5    { animation: fade-rise 0.9s ease-out 0.75s both; }
+  .animate-fade-rise-6    { animation: fade-rise 0.9s ease-out 0.9s both; }
+
+  @keyframes fade-in {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  .animate-fade-in { animation: fade-in 1.2s ease-out both; }
+
+  @keyframes ember-flicker {
+    0%, 100% { opacity: 0.85; }
+    40%      { opacity: 1; }
+    60%      { opacity: 0.7; }
+  }
+  .ember-flicker { animation: ember-flicker 5.5s ease-in-out infinite; }
+
+  .font-display { font-family: 'Instrument Serif', serif; }
+  .font-body    { font-family: 'Inter', sans-serif; }
+
+  /* Hairline divider */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+  }
+
+  /* Kanji-style section marker */
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Drop cap for opening paragraph */
+  .dropcap::first-letter {
+    font-family: 'Instrument Serif', serif;
+    font-size: 5.5rem;
+    line-height: 0.85;
+    float: left;
+    padding: 0.3rem 0.9rem 0 0;
+    color: hsl(0 0% 100%);
+  }
+
+  .disc {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: hsl(0 0% 100% / 0.5);
+    display: inline-block;
+    flex: none;
+  }
+</style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+  <div class="ember-bg" aria-hidden="true"></div>
+  <div class="ember-grain ember-flicker" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full">
+
+    <!-- NAV -->
+    <nav class="animate-fade-in">
+      <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
+        <a href="/" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Instrument Serif', serif;">
+          Ancient Fire
+        </a>
+
+        <div class="hidden md:flex items-center gap-10">
+          <a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <a href="/offerings" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Offerings</a>
+          <a href="#" class="text-sm text-foreground transition-colors">About</a>
+          <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
+          <a href="#" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
+        </div>
+
+        <button class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground">
+          Begin Journey
+        </button>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-16 text-center">
+      <div class="animate-fade-rise section-eyebrow mb-8">About the Dojo</div>
+
+      <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
+          style="font-family: 'Instrument Serif', serif; line-height: 0.95; letter-spacing: -2.46px;">
+        A <em class="not-italic text-muted-foreground">way place</em> for <br class="hidden sm:block"/>
+        those seeking <em class="not-italic text-muted-foreground">return.</em>
+      </h1>
+
+      <div class="animate-fade-rise-2 mt-10 flex items-center justify-center gap-5 sm:gap-8 text-xs sm:text-sm uppercase text-foreground/90"
+           style="letter-spacing: 0.32em;">
+        <span>Gather</span>
+        <span class="h-px w-6 sm:w-10 bg-foreground/30" aria-hidden="true"></span>
+        <span>Inspire</span>
+        <span class="h-px w-6 sm:w-10 bg-foreground/30" aria-hidden="true"></span>
+        <span>Thrive</span>
+      </div>
+    </header>
+
+    <!-- OPENING PROSE -->
+    <section class="max-w-3xl mx-auto px-8 pb-16">
+      <div class="animate-fade-rise-3 hairline mb-16"></div>
+
+      <p class="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.15] text-foreground animate-fade-rise-3"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -0.5px;">
+        Ancient Fire is a <em class="not-italic text-muted-foreground">Dojo</em> — a <em class="not-italic text-muted-foreground">‘way place’</em> —
+        dedicated to the practice of self progression.
+      </p>
+
+      <p class="animate-fade-rise-4 mt-12 text-base sm:text-lg leading-[1.8] text-muted-foreground dropcap">
+        It is sanctuary. A house of service, geared towards seeking the point of origin: <span class="text-foreground">our self.</span>
+      </p>
+    </section>
+
+    <!-- OFFERINGS -->
+    <section class="max-w-5xl mx-auto px-8 py-20">
+      <div class="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
+
+        <div class="animate-fade-rise-4">
+          <div class="section-eyebrow mb-4">01 — Breath</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-foreground"
+              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1px;">
+            Breathwork<br/>
+            <em class="not-italic text-muted-foreground">as meditation.</em>
+          </h2>
+        </div>
+
+        <div class="animate-fade-rise-5 pt-2">
+          <p class="text-lg leading-[1.8] text-muted-foreground max-w-xl">
+            We offer breathwork as a meditation — held for
+            <span class="text-foreground">groups</span>, or
+            <span class="text-foreground">privately, one on one.</span>
+          </p>
+          <p class="mt-6 text-sm leading-[1.8] text-muted-foreground/80 max-w-xl">
+            A practice for arriving home to the body. For hearing what the quiet has been trying to say.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="hairline"></div>
+    </div>
+
+    <!-- MARTIAL ARTS -->
+    <section class="max-w-5xl mx-auto px-8 py-20">
+      <div class="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
+
+        <div class="animate-fade-rise-4">
+          <div class="section-eyebrow mb-4">02 — Body</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-foreground"
+              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1px;">
+            Martial arts<br/>
+            <em class="not-italic text-muted-foreground">from around the globe.</em>
+          </h2>
+        </div>
+
+        <div class="animate-fade-rise-5 pt-2">
+          <p class="text-base leading-[1.8] text-muted-foreground max-w-xl mb-10">
+            A variety of specialized traditions, studied with reverence and held with rigor.
+          </p>
+
+          <ul class="grid grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-6 text-sm uppercase text-foreground"
+              style="letter-spacing: 0.28em;">
+            <li class="flex items-center gap-3"><span class="disc"></span>Jeet&nbsp;Kune&nbsp;Do</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Kali</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Eskrima</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Silat</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Kickboxing</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Muay&nbsp;Thai</li>
+            <li class="flex items-center gap-3"><span class="disc"></span>Savate</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="hairline"></div>
+    </div>
+
+    <!-- PLACE -->
+    <section class="max-w-5xl mx-auto px-8 py-20">
+      <div class="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-start">
+
+        <div class="animate-fade-rise-4">
+          <div class="section-eyebrow mb-4">03 — Place</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-foreground"
+              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1px;">
+            Salt Spring<br/>
+            <em class="not-italic text-muted-foreground">Island.</em>
+          </h2>
+        </div>
+
+        <div class="animate-fade-rise-5 pt-2">
+          <p class="text-lg leading-[1.8] text-muted-foreground max-w-xl">
+            Located on the beautiful west coast of Salt Spring Island, we offer an
+            <span class="text-foreground">oasis of opportunity</span> — to learn, to grow,
+            to practice, and to deepen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVITATION -->
+    <section class="max-w-4xl mx-auto px-8 pt-16 pb-24 text-center">
+      <div class="animate-fade-rise-5 section-eyebrow mb-10">An Invitation</div>
+
+      <p class="animate-fade-rise-5 font-display text-4xl sm:text-5xl md:text-6xl text-muted-foreground leading-[1.15]"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+        For those seeking truth…<br/>
+        and knowledge of oneself,
+      </p>
+
+      <p class="animate-fade-rise-6 mt-10 font-display text-5xl sm:text-6xl md:text-7xl text-foreground leading-none"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1.5px;">
+        You are welcome <em class="not-italic text-muted-foreground">here.</em>
+      </p>
+
+      <div class="animate-fade-rise-6 mt-16">
+        <a href="#"
+           class="liquid-glass inline-block rounded-full px-14 py-5 text-base text-foreground"
+           style="text-decoration: none;">
+          Begin Journey
+        </a>
+      </div>
+    </section>
+
+    <!-- LAND ACKNOWLEDGMENT -->
+    <footer class="max-w-3xl mx-auto px-8 pt-16 pb-20 text-center">
+      <div class="hairline mb-12"></div>
+      <p class="text-xs sm:text-sm uppercase text-muted-foreground/80 leading-relaxed"
+         style="letter-spacing: 0.22em;">
+        We acknowledge that we are on the traditional territories <br class="hidden sm:block"/>
+        of the Coast Salish Peoples.
+      </p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
