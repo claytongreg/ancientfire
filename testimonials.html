@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancient Fire — Testimonials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: hsl(24 8% 10%);
+    --color-foreground: hsl(0 0% 100%);
+    --color-muted-foreground: hsl(240 4% 66%);
+    --color-primary: hsl(0 0% 100%);
+    --color-primary-foreground: hsl(0 0% 4%);
+    --color-border: hsl(0 0% 18%);
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+</style>
+<style>
+  :root {
+    --background: 24 8% 10%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 240 4% 66%;
+    --border: 0 0% 18%;
+  }
+
+  html, body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .ember-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse at 20% 10%, hsla(24, 10%, 16%, 0.6) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, hsla(24, 8%, 12%, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, hsl(24 8% 8%) 0%, hsl(24 8% 10%) 45%, hsl(12 40% 8%) 100%);
+  }
+  .ember-grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.04; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer; color: hsl(0 0% 100%);
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); }
+
+  @keyframes fade-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-rise      { animation: fade-rise 0.9s ease-out both; }
+  .animate-fade-rise-1    { animation: fade-rise 0.9s ease-out 0.15s both; }
+  .animate-fade-rise-2    { animation: fade-rise 0.9s ease-out 0.3s both; }
+  .animate-fade-rise-3    { animation: fade-rise 0.9s ease-out 0.45s both; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fade-in 1.2s ease-out both; }
+
+  @keyframes ember-flicker {
+    0%, 100% { opacity: 0.85; }
+    40%      { opacity: 1; }
+    60%      { opacity: 0.7; }
+  }
+  .ember-flicker { animation: ember-flicker 5.5s ease-in-out infinite; }
+
+  .font-display { font-family: 'Instrument Serif', serif; }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+  }
+
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.4em;
+    text-transform: uppercase; color: hsl(var(--muted-foreground));
+  }
+
+  /* Testimonial card */
+  .t-card {
+    position: relative;
+    padding: 2.25rem 2rem 1.75rem;
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    transition: transform .4s ease, border-color .4s ease, background .4s ease;
+  }
+  .t-card:hover {
+    border-color: rgba(255,255,255,0.14);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%);
+  }
+  .t-card .mark {
+    position: absolute;
+    top: 0.2rem; left: 1.25rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.12);
+    user-select: none;
+  }
+  .t-card p.quote {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: hsl(0 0% 92%);
+    letter-spacing: -0.2px;
+  }
+  .t-card .attrib {
+    margin-top: 1.25rem;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .t-card.with-portrait { padding-top: 0; overflow: hidden; }
+  .t-card .portrait {
+    display: block;
+    width: calc(100% + 4rem);
+    margin: 0 -2rem 1.75rem;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    filter: grayscale(0.2) brightness(0.9) saturate(0.9);
+  }
+
+  .masonry {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 720px)  { .masonry { column-count: 2; } }
+  @media (min-width: 1100px) { .masonry { column-count: 3; } }
+
+  .pull-quote {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.75rem, 3.2vw, 2.8rem);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: hsl(0 0% 95%);
+  }
+</style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+  <div class="ember-bg" aria-hidden="true"></div>
+  <div class="ember-grain ember-flicker" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full">
+
+    <!-- NAV -->
+    <nav class="animate-fade-in">
+      <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
+        <a href="/" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Instrument Serif', serif;">
+          Ancient Fire
+        </a>
+        <div class="hidden md:flex items-center gap-10">
+          <a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <a href="/offerings" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Offerings</a>
+          <a href="/about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+          <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
+          <a href="#" class="text-sm text-foreground transition-colors">Testimonials</a>
+        </div>
+        <button class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground">
+          Begin Journey
+        </button>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="max-w-5xl mx-auto px-8 pt-20 md:pt-28 pb-10 text-center">
+      <div class="animate-fade-rise section-eyebrow mb-8">Testimonials</div>
+      <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-[7rem] text-foreground"
+          style="font-family: 'Instrument Serif', serif; line-height: 0.95; letter-spacing: -2.46px;">
+        In their <em class="not-italic text-muted-foreground">own</em> words.
+      </h1>
+      <p class="animate-fade-rise-2 mt-8 max-w-xl mx-auto text-lg leading-[1.7] text-muted-foreground">
+        Reflections from those who have sat, breathed, and returned — gathered
+        from ceremonies at Ancient Fire.
+      </p>
+    </header>
+
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="animate-fade-rise-3 hairline"></div>
+    </div>
+
+    <!-- FEATURED PULL QUOTE -->
+    <section class="max-w-4xl mx-auto px-8 py-20 text-center">
+      <p class="pull-quote">
+        <span class="text-muted-foreground">“</span>Breathwork with Amber is a
+        <em class="not-italic">lifetime of talk therapy</em> in one session.<span class="text-muted-foreground">”</span>
+      </p>
+      <div class="mt-6 text-xs uppercase text-muted-foreground" style="letter-spacing: 0.32em;">
+        Mickey Sumner &middot; Actor
+      </div>
+    </section>
+
+    <!-- MASONRY GRID -->
+    <section class="max-w-6xl mx-auto px-8 pb-12">
+      <div class="masonry">
+
+        <!-- Mickey -->
+        <figure class="t-card with-portrait">
+          <img class="portrait" src="https://ancientfire.ca/wp-content/uploads/2023/03/mickey_r.jpg" alt="Mickey Sumner" loading="lazy"/>
+          <span class="mark">“</span>
+          <p class="quote">I have done years of talk therapy — <em>years</em> — Breathwork with Amber is a lifetime of talk therapy in one session. I can't express how important this work is. I was transported to childhood, through past traumas, into outer space, but most importantly, I became incredibly present. Amber's facilitation is wonderfully intuitive and nurturing.</p>
+          <figcaption class="attrib">Mickey Sumner &middot; Actor</figcaption>
+        </figure>
+
+        <!-- Misha -->
+        <figure class="t-card with-portrait">
+          <img class="portrait" src="https://ancientfire.ca/wp-content/uploads/2023/03/mish_r.jpg" alt="Misha Collins" loading="lazy"/>
+          <span class="mark">“</span>
+          <p class="quote">I have had several profound Breathwork sessions with Amber. She is such an intuitive, attentive, present guide through the process that it is hard to describe. I would recommend this work with this practitioner to anyone.</p>
+          <figcaption class="attrib">Misha Collins &middot; Actor</figcaption>
+        </figure>
+
+        <!-- E.L. -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">With your innate ability to hold the most incredible safe space, you allowed me to finally see me, for who I truly am. You guided me, held me and allowed all of the angry, pent-up, wounded parts of myself, to surface and be released. I am a changed Woman. Thank you Amber, for holding that space.</p>
+          <figcaption class="attrib">E.L.</figcaption>
+        </figure>
+
+        <!-- Brett -->
+        <figure class="t-card with-portrait">
+          <img class="portrait" src="https://ancientfire.ca/wp-content/uploads/2024/07/14479946_web1_Brett-Kissel.jpg" alt="Brett Kissel" loading="lazy"/>
+          <span class="mark">“</span>
+          <p class="quote">I didn't know anything about Breathwork but I was desperate for anything that could help me understand my reality, help heal my traumas, and most importantly, move forward. I arrived confused, hurt, and as a walking shell. I left feeling inspired, hopeful, and felt significant relief. I laughed. I cried. I felt. And most importantly, I started to heal.</p>
+          <figcaption class="attrib">Brett Kissel &middot; Country Music Artist</figcaption>
+        </figure>
+
+        <!-- Jelena -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">Super grateful to have found the breathwork ceremonies offered at Ancient Fire. The space is beautiful, relaxing and very well-held; the facilitation is both grounded and sacred. When I'm there, I feel empowered and supported to work with whatever is coming up.</p>
+          <figcaption class="attrib">Jelena Marda &middot; BA, RPC</figcaption>
+        </figure>
+
+        <!-- Chelah -->
+        <figure class="t-card with-portrait">
+          <img class="portrait" src="https://ancientfire.ca/wp-content/uploads/2023/03/chelah.jpg" alt="Chelah Horsdale" loading="lazy"/>
+          <span class="mark">“</span>
+          <p class="quote">It would be difficult to overstate how impactful the experience of Breathwork with Amber has been for me. She guided me through awakening my power and a connection to my body that I didn't know was available. Her skill at creating a safe, supported and patient environment allowed for a transformation that I've carried into my life. My gratitude is infinite.</p>
+          <figcaption class="attrib">Chelah Horsdale &middot; Actor</figcaption>
+        </figure>
+
+        <!-- Erin -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">Amber's private Breathwork Ceremony was an experience like no other. Her gentle and knowledgeable coaching helped me to create a journey that had very positive results on my physical health — as well as brought forth a sense of clarity and calm I had not felt in a very long time.</p>
+          <figcaption class="attrib">Erin Smith &middot; Producer</figcaption>
+        </figure>
+
+        <!-- Divi -->
+        <figure class="t-card with-portrait">
+          <img class="portrait" src="https://ancientfire.ca/wp-content/uploads/2023/04/Dr_Divi_r3.jpg" alt="Dr Divi Chandra" loading="lazy"/>
+          <span class="mark">“</span>
+          <p class="quote">Amber is incredibly gifted, loving and caring. She KNOWS intuitively exactly what you need and when you need it. If you have never experienced breathwork, or are an expert, or are really ready to shake up your healing — you must check this out. It is absolutely incredible.</p>
+          <figcaption class="attrib">Dr Divi Chandra &middot; MD</figcaption>
+        </figure>
+
+        <!-- Rory -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">I attend breathwork sessions with Amber and Jesse and I am always very pleased with how seriously they take the work. They hold the space well for everyone, and have an ability to see what each person needs as the session progresses. These two are the real deal.</p>
+          <figcaption class="attrib">Rory Bennett</figcaption>
+        </figure>
+
+        <!-- T.R. -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">I've been fortunate enough to attend several Shamanic Breathwork sessions at Ancient Fire and I've found them incredibly healing. I immediately felt nurtured and safe — charmed by the energy of wisdom, strength, and heart-centeredness embodied by the facilitators.</p>
+          <figcaption class="attrib">T.R.</figcaption>
+        </figure>
+
+        <!-- Kyle -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">Ancient Fire's Breathwork Ceremonies have helped me see what is hidden within myself. They have allowed me to further process grief, to understand love, to feel more alive and be more in tune with myself and the world around me. A safe haven to be unapologetically raw, to go deep and emerge a little lighter and brighter than before. All you have to do is show up, be open, be present and Breathe.</p>
+          <figcaption class="attrib">Kyle Glenn Sutherland &middot; Stunt Actor</figcaption>
+        </figure>
+
+        <!-- C. Tickle -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">This was my first Breathwork session. From the moment I walked through the Ancient Fire door there was an overall feeling of being welcome and cared for. The expert guidance from Amber and Jesse helped me relax and feel safe to express myself freely with each breath. It left me wanting more.</p>
+          <figcaption class="attrib">C. Tickle &middot; Multimedia Consultant</figcaption>
+        </figure>
+
+        <!-- Bruce & Nancy -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">My wife and I attended several ceremonies at Ancient Fire. They provided a very safe and sacred environment for us to have an amazing experience. So much so, that we introduced 7 of our friends. I highly recommend Amber and Jesse.</p>
+          <figcaption class="attrib">Bruce &amp; Nancy</figcaption>
+        </figure>
+
+        <!-- Graham -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">I am extremely grateful for the private breathwork session with Amber. I am relatively new to breathwork but knew instantly when I entered the room it would be intense. What I enjoyed most was how I was always in complete control of the experience. It was very challenging and yet transformational for me.</p>
+          <figcaption class="attrib">Graham W &middot; Actor</figcaption>
+        </figure>
+
+        <!-- Lara -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">I arrived open and with ‘a lot of knowledge of who I was’. I left knowing that I don't know a thing. Thank you from the bottom of my heart for helping me reset completely. It was a very humbling and profound experience. It was so precious being in your presence.</p>
+          <figcaption class="attrib">Lara</figcaption>
+        </figure>
+
+        <!-- Remi -->
+        <figure class="t-card">
+          <span class="mark">“</span>
+          <p class="quote">I've been participating in the breathing sessions at Ancient Fire for about six months now, almost every Saturday or Sunday. Amber, Jesse and Ancient Fire are very skilled, wise, great-hearted and supportive people. Their guidance helped me a lot in my healing process. Give it a try — it's really worth it.</p>
+          <figcaption class="attrib">Remi</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="hairline"></div>
+    </div>
+
+    <!-- CLOSING CTA -->
+    <section class="max-w-4xl mx-auto px-8 pt-20 pb-24 text-center">
+      <div class="section-eyebrow mb-10">Your Turn</div>
+      <p class="font-display text-4xl sm:text-5xl md:text-6xl text-muted-foreground leading-[1.15]"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+        When you are ready,
+      </p>
+      <p class="mt-6 font-display text-5xl sm:text-6xl md:text-7xl text-foreground leading-none"
+         style="font-family: 'Instrument Serif', serif; letter-spacing: -1.5px;">
+        the breath is <em class="not-italic text-muted-foreground">waiting.</em>
+      </p>
+      <div class="mt-16">
+        <a href="/offerings"
+           class="liquid-glass inline-block rounded-full px-14 py-5 text-base text-foreground"
+           style="text-decoration: none;">
+          See Offerings
+        </a>
+      </div>
+    </section>
+
+    <!-- LAND ACKNOWLEDGMENT -->
+    <footer class="max-w-3xl mx-auto px-8 pt-12 pb-20 text-center">
+      <div class="hairline mb-12"></div>
+      <p class="text-xs sm:text-sm uppercase text-muted-foreground/80 leading-relaxed"
+         style="letter-spacing: 0.22em;">
+        We acknowledge that we are on the traditional territories <br class="hidden sm:block"/>
+        of the Coast Salish Peoples.
+      </p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

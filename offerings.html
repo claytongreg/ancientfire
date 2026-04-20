@@ -160,7 +160,228 @@
     transition: opacity 0.4s ease;
     opacity: 0.15;
   }
-  .img-label {
+  .img-wrap > img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: saturate(0.95) brightness(0.95);
+  }
+  .offering-card:hover .img-wrap > img { transform: scale(1.04); filter: saturate(1) brightness(1); }
+  .img-wrap::before, .img-wrap::after { z-index: 1; }
+  .img-label { z-index: 2; }
+
+  /* Header backdrop — matches About page hero video treatment */
+  .hero-img-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-img-wrap img {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.42) contrast(1.05) saturate(0.75) sepia(0.22) blur(1.5px);
+  }
+  .hero-img-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 40%, hsla(22, 70%, 35%, 0.18) 0%, transparent 60%),
+      linear-gradient(180deg, hsla(24, 8%, 8%, 0.45) 0%, hsla(24, 8%, 8%, 0.25) 50%, hsla(24, 8%, 8%, 1) 100%);
+    z-index: 1;
+  }
+  .hero-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    z-index: 2;
+  }
+
+  /* ------ Modal ------ */
+  .af-modal {
+    position: fixed; inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4vh 1.5rem;
+    overflow-y: auto;
+  }
+  .af-modal.open { display: flex; animation: modal-fade 0.35s ease-out both; }
+  @keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .af-modal-scrim {
+    position: fixed; inset: 0;
+    background: rgba(10, 8, 6, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .af-modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 820px;
+    margin: auto;
+    border-radius: 6px;
+    background: linear-gradient(180deg, hsl(24 10% 11%) 0%, hsl(24 8% 9%) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    overflow: hidden;
+    animation: modal-rise 0.5s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes modal-rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .af-modal-hero {
+    position: relative;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+  .af-modal-hero img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.7) saturate(0.95);
+  }
+  .af-modal-hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, hsl(24 10% 11%) 100%);
+  }
+  .af-modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    z-index: 3;
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: hsl(0 0% 95%);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .af-modal-close:hover { background: rgba(0,0,0,0.8); transform: scale(1.05); }
+  .af-modal-body {
+    padding: 2rem 2rem 2.5rem;
+  }
+  @media (min-width: 720px) {
+    .af-modal-body { padding: 2.5rem 3rem 3rem; }
+  }
+  .af-modal-body .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.4em;
+    text-transform: uppercase; color: hsl(var(--muted-foreground));
+    margin-bottom: 0.75rem;
+  }
+  .af-modal-body h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: hsl(0 0% 98%);
+    margin-bottom: 1.5rem;
+  }
+  .af-modal-meta {
+    display: grid;
+    gap: 1rem 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.015);
+  }
+  .af-modal-meta .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 4px;
+  }
+  .af-modal-meta .value { font-size: 14px; color: hsl(0 0% 92%); line-height: 1.45; }
+  .af-modal-body .prose p {
+    color: hsl(0 0% 82%);
+    line-height: 1.75;
+    margin-bottom: 1.1rem;
+    font-size: 15px;
+  }
+  .af-modal-body .prose p.lead {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem;
+    line-height: 1.45;
+    color: hsl(0 0% 96%);
+    margin-bottom: 1.5rem;
+  }
+  .af-modal-body h3.section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    margin: 2rem 0 0.9rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .af-modal-body ul {
+    list-style: none; padding: 0; margin: 0 0 1rem;
+  }
+  .af-modal-body ul li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: hsl(0 0% 82%);
+    line-height: 1.65;
+    font-size: 14px;
+    margin-bottom: 0.55rem;
+  }
+  .af-modal-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.7em;
+    width: 4px; height: 4px;
+    border-radius: 999px;
+    background: hsl(0 0% 100% / 0.5);
+  }
+  .af-modal-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;
+    justify-content: space-between;
+  }
+  .af-modal-footer .contact {
+    font-size: 13px; color: hsl(var(--muted-foreground));
+  }
+  .af-modal-footer a.mail {
+    color: hsl(0 0% 95%);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 1px;
+  }
+  .af-modal-footer a.mail:hover { border-color: rgba(255,255,255,0.8); }
+  .af-modal .cta {
+    display: inline-block;
+    padding: 0.9rem 1.75rem;
+    border-radius: 999px;
+    font-size: 13px;
+    color: hsl(0 0% 98%);
+    text-decoration: none;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.14);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .af-modal .cta:hover { background: rgba(255,255,255,0.08); transform: scale(1.02); }
+  body.modal-open { overflow: hidden; }
+  .img-label { display: none;
     position: absolute;
     bottom: 12px; left: 14px;
     font-family: ui-monospace, monospace;
@@ -272,7 +493,13 @@
     </nav>
 
     <!-- HEADER -->
-    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-20 text-center">
+    <header class="relative max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-20 text-center">
+      <!-- Ambient bonfire backdrop, warmly filtered -->
+      <div class="hero-img-wrap" aria-hidden="true">
+        <img src="images/offerings-hero.png" alt=""/>
+      </div>
+
+      <div class="relative" style="z-index: 3;">
       <div class="animate-fade-rise section-eyebrow mb-8">Offerings</div>
 
       <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
@@ -284,6 +511,7 @@
       <p class="animate-fade-rise-2 mt-10 text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
         Breathwork and ceremony, held for groups, couples, and one-on-one — alongside seasonal workshops and retreats for those ready to meet themselves.
       </p>
+      </div>
     </header>
 
     <div class="max-w-6xl mx-auto px-8">
@@ -307,8 +535,9 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-10 md:gap-14">
 
         <!-- CARD 1 -->
-        <a href="#" class="offering-card animate-fade-rise-2 block group">
+        <a href="#" data-modal="group" class="offering-card animate-fade-rise-2 block group">
           <div class="img-wrap mb-6">
+            <img src="images/group-flame.jpg" alt="Hands cradling a flame on sacred geometry" loading="lazy"/>
             <div class="img-label">new-flame-image</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
@@ -332,8 +561,9 @@
         </a>
 
         <!-- CARD 2 -->
-        <a href="#" class="offering-card animate-fade-rise-3 block group">
-          <div class="img-wrap mb-6" style="background: radial-gradient(ellipse at 60% 40%, hsla(22,80%,40%,0.5) 0%, transparent 65%), linear-gradient(200deg, hsl(18 35% 14%) 0%, hsl(201 55% 9%) 100%);">
+        <a href="#" data-modal="private" class="offering-card animate-fade-rise-3 block group">
+          <div class="img-wrap mb-6">
+            <img src="images/private-light.jpg" alt="Cupped hands holding light" loading="lazy"/>
             <div class="img-label">private_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
@@ -355,8 +585,9 @@
         </a>
 
         <!-- CARD 3 -->
-        <a href="#" class="offering-card animate-fade-rise-3 block group">
-          <div class="img-wrap mb-6" style="background: radial-gradient(ellipse at 40% 60%, hsla(14,70%,35%,0.55) 0%, transparent 65%), linear-gradient(220deg, hsl(12 45% 12%) 0%, hsl(24 8% 10%) 100%);">
+        <a href="#" data-modal="couples" class="offering-card animate-fade-rise-3 block group">
+          <div class="img-wrap mb-6">
+            <img src="images/couples-breath.jpg" alt="Couple holding hands at sunset" loading="lazy"/>
             <div class="img-label">couples-breath_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
@@ -378,8 +609,9 @@
         </a>
 
         <!-- CARD 4 -->
-        <a href="#" class="offering-card animate-fade-rise-4 block group">
-          <div class="img-wrap mb-6" style="background: radial-gradient(ellipse at 70% 30%, hsla(30,75%,40%,0.45) 0%, transparent 60%), linear-gradient(180deg, hsl(15 40% 13%) 0%, hsl(24 8% 9%) 100%);">
+        <a href="#" data-modal="privateGroup" class="offering-card animate-fade-rise-4 block group">
+          <div class="img-wrap mb-6">
+            <img src="images/private-groups.jpg" alt="Group embracing at sunset on the beach" loading="lazy"/>
             <div class="img-label">Private-Groups_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
@@ -500,6 +732,190 @@
     </footer>
 
   </div>
+
+  <!-- ============ MODAL ============ -->
+  <div class="af-modal" id="af-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="af-modal-scrim" data-close></div>
+    <div class="af-modal-dialog" role="document">
+      <button class="af-modal-close" aria-label="Close" data-close>✕</button>
+      <div class="af-modal-hero"><img id="af-modal-img" alt=""/></div>
+      <div class="af-modal-body" id="af-modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const OFFERINGS = {
+      group: {
+        eyebrow: "Breathwork Ceremony",
+        title: "Ancient Fire<br/><em class='not-italic text-muted-foreground'>Breathwork.</em>",
+        img: "images/group-flame.jpg",
+        meta: [
+          { label: "When",     value: "7:00&ndash;9:00 pm &middot; Coming Soon" },
+          { label: "Where",    value: "108B Walker Hook Road<br/>Salt Spring Island, BC" },
+          { label: "Offering", value: "Book now $40 &middot; Sliding scale $30&ndash;$40 cash at the door. Space is limited — please arrive early." }
+        ],
+        lead: "Step into a sanctuary — a space where breath becomes medicine and your inner wisdom keeper becomes the guide.",
+        body: [
+          "Conscious connected breath is a gentle yet powerful technique that invites you to access deeper states of awareness, emotional release, and energetic alignment. We begin to revitalize our minds and bodies, gain clarity and insight, and orient ourselves toward healing and transformation in the midst of the storm.",
+          "Layered with the vibrations of sound healing, this experience becomes a full-body reset. The frequencies work on a cellular level to shift stagnant energy, restore harmony, and support the nervous system in finding peace. Together, breath and sound create a deeply restorative journey — one that invites you to surrender, remember, and return to your natural rhythm.",
+          "Come as you are. Leave lighter, clearer, and more connected."
+        ],
+        sections: [
+          { title: "What to bring",
+            items: [
+              "Please dress warm and in layers — breathwork can be very cooling.",
+              "A blanket and pillow, or anything that lets you lie comfortably on the floor.",
+              "A water bottle.",
+              "A journal (optional).",
+              "An open and willing heart."
+            ],
+            note: "Best not to eat for at least 2 hours before the session."
+          },
+          { title: "Benefits of breathwork",
+            items: [
+              "Improves physical, mental, emotional, and spiritual health.",
+              "One of the most powerful practices for decreasing stress and anxiety.",
+              "Increases energy levels and boosts the immune system.",
+              "Oxygenates and alkalizes the body — an anti-aging, anti-cancer practice.",
+              "Proven to improve blood pressure and circulation.",
+              "Can improve digestive issues, PTSD, chronic lung conditions, and mood.",
+              "Widely used by artists and creatives for clarity and insight."
+            ]
+          },
+          { title: "Contraindications",
+            items: [
+              "Not recommended for those with severe cardiovascular disorders, uncontrolled high blood pressure, aneurysms, history of heart attack, myocarditis, atrial fibrillation, advanced kidney disease or diabetes, contagious respiratory disease, severe psychological imbalances, detached retina, or glaucoma.",
+              "Please inform facilitators of recent injuries or surgeries, low blood pressure, or if you are pregnant.",
+              "No previous experience or training necessary."
+            ]
+          }
+        ],
+        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Ancient%20Fire%20Breathwork" }
+      },
+
+      private: {
+        eyebrow: "Private Breathwork Ceremony",
+        title: "One on One<br/><em class='not-italic text-muted-foreground'>Private Session.</em>",
+        img: "images/private-light.jpg",
+        meta: [
+          { label: "Duration", value: "90&ndash;120 minutes" },
+          { label: "Where",    value: "108 Walker Hook Road<br/>Salt Spring Island, BC" },
+          { label: "Offering", value: "Sliding scale $180&ndash;$225 cash<br/>Email to request dates and time." }
+        ],
+        lead: "Step into a sacred space created just for you.",
+        body: [
+          "In this private one-on-one breathwork session, you'll be guided gently through a journey of release, clarity, and reconnection. Whether you're looking to process stuck emotions, access deeper insight, or simply breathe more fully into life, this is a space to meet yourself exactly where you are.",
+          "Each session is intuitively led and trauma-informed, allowing you to feel safe, supported, and free to go as deep as your soul is ready for. This is your time — to unravel, to remember, to rise.",
+          "Private sessions are offered by Amber."
+        ],
+        cta: { label: "Email Amber", href: "mailto:info@ancientfire.ca?subject=One-on-One%20Breathwork%20Session" }
+      },
+
+      couples: {
+        eyebrow: "Couples Breathwork",
+        title: "Couples<br/><em class='not-italic text-muted-foreground'>Breathwork Sessions.</em>",
+        img: "images/couples-breath.jpg",
+        meta: [
+          { label: "Duration", value: "90&ndash;120 minutes" },
+          { label: "Where",    value: "108 Walker Hook Road<br/>Salt Spring Island, BC" },
+          { label: "Offering", value: "Sliding scale $275&ndash;$350 cash<br/>Email to request dates and time." }
+        ],
+        lead: "Connection begins with the breath.",
+        body: [
+          "Whether you're in a romantic relationship, a friendship, or navigating healing with a loved one, this breathwork session invites two people into a shared experience of presence and deeper understanding.",
+          "Through guided breath, intention, and conscious connection, you'll explore new levels of intimacy, communication, and emotional release. This is a beautiful space for re-connection, repair, and rooted love — breathing not only with, but for each other.",
+          "Sessions are offered by Amber."
+        ],
+        cta: { label: "Email Amber", href: "mailto:info@ancientfire.ca?subject=Couples%20Breathwork%20Session" }
+      },
+
+      privateGroup: {
+        eyebrow: "Private Group Breathwork",
+        title: "Private Group<br/><em class='not-italic text-muted-foreground'>Breathwork Journeys.</em>",
+        img: "images/private-groups.jpg",
+        meta: [
+          { label: "Duration", value: "2 hours" },
+          { label: "Where",    value: "Our tipi or outdoors (weather permitting) &mdash; or we can come to your sacred space on Salt Spring." },
+          { label: "Offering", value: "Please contact us for pricing.<br/>Email to request dates and time." }
+        ],
+        lead: "Breathe as one. Heal as one. Rise as one.",
+        body: [
+          "Whether you're celebrating a sacred milestone, gathering in sisterhood, deepening your bonds, or simply seeking a powerful shared experience — group breathwork offers a transformative and heart-opening journey to take together.",
+          "Designed specifically for groups who already share a connection — bachelorette parties, bridal showers, sisterhood circles, men's groups, family healing, close friend circles and retreat guests — these sessions create a safe and intimate container to breathe, release, and expand as one.",
+          "Guided through conscious connected breath and sound healing, and held in a trauma-informed space, you'll move through stuck energy, collective tension, and unspoken emotion — opening to the wonder and beauty of all that is, all while supporting one another through the power of presence. No words needed. Just breath, intention, and the strength of being witnessed.",
+          "This experience may include guided intention setting, somatic movement, sound healing, and grounding integration to deepen the journey. Each session is intuitively tailored to your group's energy, needs, and shared intention.",
+          "Expect laughter, tears, breakthroughs, and a profound sense of connection — not just with each other, but with yourselves. It's a journey of remembering who you are, together."
+        ],
+        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Private%20Group%20Breathwork%20Journey" }
+      }
+    };
+
+    const modal    = document.getElementById('af-modal');
+    const modalImg = document.getElementById('af-modal-img');
+    const modalBody= document.getElementById('af-modal-body');
+
+    function esc(s){ return s; } // already safe inline
+
+    function renderMeta(meta){
+      if (!meta || !meta.length) return '';
+      return '<div class="af-modal-meta">' + meta.map(m =>
+        `<div><div class="label">${m.label}</div><div class="value">${m.value}</div></div>`
+      ).join('') + '</div>';
+    }
+    function renderSections(sections){
+      if (!sections) return '';
+      return sections.map(s => {
+        const items = s.items ? `<ul>${s.items.map(i => `<li>${i}</li>`).join('')}</ul>` : '';
+        const note  = s.note  ? `<p style="font-style: italic; color: hsl(var(--muted-foreground)); font-size: 13px;">${s.note}</p>` : '';
+        return `<h3 class="section-title">${s.title}</h3>${items}${note}`;
+      }).join('');
+    }
+
+    function open(key){
+      const d = OFFERINGS[key];
+      if (!d) return;
+      modalImg.src = d.img;
+      modalImg.alt = '';
+      modalBody.innerHTML = `
+        <div class="eyebrow">${d.eyebrow}</div>
+        <h2>${d.title}</h2>
+        ${renderMeta(d.meta)}
+        <div class="prose">
+          ${d.lead ? `<p class="lead">${d.lead}</p>` : ''}
+          ${d.body.map(p => `<p>${p}</p>`).join('')}
+        </div>
+        ${renderSections(d.sections)}
+        <div class="af-modal-footer">
+          <div class="contact">Contact &middot; <a class="mail" href="mailto:info@ancientfire.ca">info@ancientfire.ca</a></div>
+          ${d.cta ? `<a class="cta" href="${d.cta.href}">${d.cta.label} →</a>` : ''}
+        </div>
+      `;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      modal.scrollTop = 0;
+    }
+    function close(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    document.querySelectorAll('[data-modal]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(el.getAttribute('data-modal'));
+      });
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target.hasAttribute('data-close')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+  })();
+  </script>
 
 </body>
 </html>

@@ -73,6 +73,46 @@
     cursor: pointer;
     color: hsl(0 0% 100%);
   }
+
+  /* Hero video behind the About header */
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-video-wrap video {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    filter: brightness(0.38) contrast(1.05) saturate(0.75) sepia(0.22) blur(1.5px);
+  }
+  /* Warm tint + vignette + bottom fade into page background */
+  .hero-video-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 40%, hsla(22, 70%, 35%, 0.18) 0%, transparent 60%),
+      linear-gradient(180deg, hsla(24, 8%, 8%, 0.45) 0%, hsla(24, 8%, 8%, 0.25) 50%, hsla(24, 8%, 8%, 1) 100%);
+    z-index: 1;
+  }
+  /* subtle grain over the video to match ember-grain */
+  .hero-video-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    z-index: 2;
+  }
   .liquid-glass::before {
     content: '';
     position: absolute;
@@ -183,7 +223,15 @@
     </nav>
 
     <!-- HEADER -->
-    <header class="max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-16 text-center">
+    <header class="relative max-w-5xl mx-auto px-8 pt-24 md:pt-32 pb-16 text-center">
+      <!-- Ambient hero video (muted, warmly filtered) -->
+      <div class="hero-video-wrap" aria-hidden="true">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="video/hero-about.mp4" type="video/mp4"/>
+        </video>
+      </div>
+
+      <div class="relative" style="z-index: 3;">
       <div class="animate-fade-rise section-eyebrow mb-8">About the Dojo</div>
 
       <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
@@ -200,6 +248,7 @@
         <span class="h-px w-6 sm:w-10 bg-foreground/30" aria-hidden="true"></span>
         <span>Thrive</span>
       </div>
+      </div><!-- /z-index wrapper -->
     </header>
 
     <!-- OPENING PROSE -->
@@ -239,6 +288,13 @@
           <p class="mt-6 text-sm leading-[1.8] text-muted-foreground/80 max-w-xl">
             A practice for arriving home to the body. For hearing what the quiet has been trying to say.
           </p>
+          <div class="mt-8">
+            <a href="/offerings"
+               class="liquid-glass inline-block rounded-full px-8 py-3 text-sm text-foreground"
+               style="text-decoration: none;">
+              See Breathwork Offerings →
+            </a>
+          </div>
         </div>
       </div>
     </section>

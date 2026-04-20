@@ -193,18 +193,46 @@
       </p>
     </header>
 
-    <!-- SHARED PORTRAIT -->
-    <section class="max-w-6xl mx-auto px-8 pt-8 pb-16 animate-fade-rise-2">
-      <figure class="relative overflow-hidden" style="border-radius: 4px;">
+    <!-- SHARED PORTRAIT — sticky parallax hero -->
+    <section class="relative animate-fade-rise-2" style="height: 120vh;">
+      <div class="sticky top-0 h-screen w-full overflow-hidden">
         <img src="images/jesse_amber.jpeg" alt="Amber and Jesse Blue"
-             class="w-full h-auto block"
-             style="object-fit: cover; max-height: 78vh;"/>
-        <figcaption class="absolute left-5 bottom-4 z-10 text-xs"
-                    style="font-family: ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
+             id="af-portrait"
+             class="absolute inset-0 w-full h-full block"
+             style="object-fit: cover; object-position: center 30%; transform: scale(1.05); will-change: transform, filter;"/>
+        <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 55%, rgba(12,10,9,0.85) 100%);"></div>
+        <figcaption class="absolute left-6 bottom-8 z-10 text-xs"
+                    style="font-family: ui-monospace, monospace; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
           Amber &amp; Jesse Blue · Salt Spring Island
         </figcaption>
-      </figure>
+      </div>
     </section>
+    <script>
+      (function(){
+        const img = document.getElementById('af-portrait');
+        if (!img) return;
+        const section = img.closest('section');
+        let ticking = false;
+        function update(){
+          const rect = section.getBoundingClientRect();
+          const vh = window.innerHeight;
+          // progress: 0 when section top hits viewport top, 1 when section bottom leaves
+          const total = rect.height - vh;
+          const p = Math.min(1, Math.max(0, -rect.top / total));
+          const scale = 1.05 + p * 0.08;         // gentle zoom-in
+          const translate = p * -40;              // slight upward drift
+          const blur = p * 6;                      // blurs as bios arrive
+          const brightness = 1 - p * 0.35;
+          img.style.transform = `translate3d(0, ${translate}px, 0) scale(${scale})`;
+          img.style.filter = `blur(${blur}px) brightness(${brightness})`;
+          ticking = false;
+        }
+        window.addEventListener('scroll', () => {
+          if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        update();
+      })();
+    </script>
 
     <div class="max-w-6xl mx-auto px-8">
       <div class="hairline"></div>
