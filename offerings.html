@@ -561,6 +561,114 @@
     position: absolute; left: 20px; right: 20px; bottom: 20px;
     z-index: 2;
   }
+
+  /* Featured full-width card */
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
+    text-decoration: none;
+    transition: border-color 0.4s ease, transform 0.4s ease;
+  }
+  .featured-card:hover {
+    border-color: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+  }
+  .featured-img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+    background: #111;
+  }
+  .featured-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.7s ease;
+  }
+  .featured-card:hover .featured-img img { transform: scale(1.03); }
+  .featured-body {
+    padding: 2.5rem 2rem 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .featured-card {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    .featured-img { aspect-ratio: auto; height: 100%; min-height: 420px; }
+    .featured-body { padding: 3rem 3rem 3rem; align-self: center; }
+  }
+
+  /* Upcoming sessions calendar (inside modal) */
+  .af-calendar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .af-calendar .session-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .af-calendar .session-row:hover {
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.035);
+  }
+  .af-calendar .session-date {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: -0.3px;
+    color: hsl(0 0% 98%);
+    line-height: 1.1;
+  }
+  .af-calendar .session-day {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+    margin-top: 2px;
+  }
+  .af-calendar .session-time {
+    font-size: 13px;
+    color: hsl(var(--muted-foreground));
+  }
+  .af-calendar .session-book {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-size: 12px;
+    color: hsl(0 0% 96%);
+    text-decoration: none;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.14);
+    transition: background 0.2s ease;
+    white-space: nowrap;
+  }
+  .af-calendar .session-book:hover { background: rgba(255,255,255,0.09); }
+  .af-calendar .session-reserve {
+    font-size: 11px;
+    color: hsl(var(--muted-foreground));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .af-calendar .session-reserve:hover { color: hsl(0 0% 98%); }
+  .af-cal-note {
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+
 </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">
@@ -583,19 +691,19 @@
           <a href="#" class="text-sm text-foreground transition-colors">Offerings</a>
           <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
           <a href="/testimonials" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
+          <a href="/audio" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Audio</a>
           <a href="/reach-us" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
         </div>
 
         <button class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground">
           Begin Journey
         </button>
-      </div>
-    
         <button id="af-mobile-toggle" class="af-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="af-mobile-sheet">
           <span class="bar t" aria-hidden="true"></span>
           <span class="bar m" aria-hidden="true"></span>
           <span class="bar b" aria-hidden="true"></span>
         </button>
+      </div>
     </nav>
 
     <!-- HEADER -->
@@ -635,42 +743,46 @@
             Sessions
           </h2>
         </div>
-        <div class="hidden md:block text-xs meta-label">Five ways to gather</div>
+        <div class="hidden md:block text-xs meta-label">Weekly class + private sessions</div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-10 md:gap-14">
-
-        <!-- CARD 1 -->
-        <a href="#" data-modal="group" class="offering-card animate-fade-rise-2 block group">
-          <div class="img-wrap mb-6">
-            <img src="images/group-flame.jpg" alt="Hands cradling a flame on sacred geometry" loading="lazy"/>
-            <div class="img-label">new-flame-image</div>
-          </div>
-          <div class="flex items-center gap-4 mb-4">
-            <span class="meta-label">Group</span>
+            <!-- FEATURED: WEEKLY CLASS -->
+      <a href="#" data-modal="group" class="featured-card animate-fade-rise-2 block group">
+        <div class="featured-img">
+          <img src="images/group-flame.jpg" alt="Hands cradling a flame on sacred geometry" loading="lazy"/>
+        </div>
+        <div class="featured-body">
+          <div class="flex items-center gap-4 mb-4 flex-wrap">
+            <span class="meta-label">Weekly · Public</span>
             <span class="disc"></span>
-            <span class="meta-label">Coming Soon</span>
+            <span class="meta-label" id="next-session-label">Next session — Friday</span>
           </div>
-          <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
-              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
-            Ancient Fire<br/>
-            <em class="not-italic text-muted-foreground">Breathwork.</em>
+          <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-foreground mb-5"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -1px; line-height: 1.02;">
+            Ancient Fire Weekly<br/>
+            <em class="not-italic text-muted-foreground">Public Breathwork Class.</em>
           </h3>
+          <p class="max-w-xl text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
+            Fridays, 6:00–8:00pm. Drop into a sanctuary of breath, sound, and community — every week on Salt Spring Island.
+          </p>
           <div class="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm text-muted-foreground">
-            <span><span class="text-foreground">7:00–9:00</span> pm</span>
+            <span><span class="text-foreground">6:00–8:00</span> pm</span>
             <span>·</span>
             <span>Book now <span class="text-foreground">$40</span></span>
             <span>·</span>
             <span>Sliding scale <span class="text-foreground">$30–$40</span> cash at the door</span>
           </div>
-          <span class="arrow-link">More Info <span class="arrow">→</span></span>
-        </a>
+          <span class="arrow-link">More Info &amp; Calendar <span class="arrow">→</span></span>
+        </div>
+      </a>
 
-        <!-- CARD 2 -->
+      <!-- PRIVATE SESSIONS (2x2 grid) -->
+      <div class="grid sm:grid-cols-2 gap-10 md:gap-14 mt-14">
+
+        <!-- CARD: PRIVATE -->
         <a href="#" data-modal="private" class="offering-card animate-fade-rise-3 block group">
           <div class="img-wrap mb-6">
             <img src="images/private-light.jpg" alt="Cupped hands holding light" loading="lazy"/>
-            <div class="img-label">private_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
             <span class="meta-label">One on One</span>
@@ -690,11 +802,10 @@
           <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </a>
 
-        <!-- CARD 3 -->
+        <!-- CARD: COUPLES -->
         <a href="#" data-modal="couples" class="offering-card animate-fade-rise-3 block group">
           <div class="img-wrap mb-6">
             <img src="images/couples-breath.jpg" alt="Couple holding hands at sunset" loading="lazy"/>
-            <div class="img-label">couples-breath_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
             <span class="meta-label">For Two</span>
@@ -714,11 +825,10 @@
           <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </a>
 
-        <!-- CARD 4 -->
+        <!-- CARD: PRIVATE GROUP -->
         <a href="#" data-modal="privateGroup" class="offering-card animate-fade-rise-4 block group">
           <div class="img-wrap mb-6">
             <img src="images/private-groups.jpg" alt="Group embracing at sunset on the beach" loading="lazy"/>
-            <div class="img-label">Private-Groups_r</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
             <span class="meta-label">Private Group</span>
@@ -738,11 +848,10 @@
           <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </a>
 
-        <!-- CARD 5 - First Responders -->
-        <a href="#" data-modal="firstResponders" class="offering-card animate-fade-rise-4 block group sm:col-span-2">
-          <div class="img-wrap mb-6" style="aspect-ratio: 16 / 7;">
+        <!-- CARD: FIRST RESPONDERS -->
+        <a href="#" data-modal="firstResponders" class="offering-card animate-fade-rise-4 block group">
+          <div class="img-wrap mb-6">
             <img src="images/offerings-hero.png" alt="Bonfire at night — nervous system restoration" loading="lazy"/>
-            <div class="img-label">first-responders</div>
           </div>
           <div class="flex items-center gap-4 mb-4">
             <span class="meta-label">First Responders</span>
@@ -758,8 +867,6 @@
             <span>Private session or small group</span>
             <span>·</span>
             <span>In person or online</span>
-            <span>·</span>
-            <span>Contact for details</span>
           </div>
           <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </a>
@@ -879,20 +986,21 @@
   (function(){
     const OFFERINGS = {
       group: {
-        eyebrow: "Breathwork Ceremony",
-        title: "Ancient Fire<br/><em class='not-italic text-muted-foreground'>Breathwork.</em>",
+        eyebrow: "Weekly · Public Class",
+        title: "Ancient Fire Weekly<br/><em class='not-italic text-muted-foreground'>Public Breathwork Class.</em>",
         img: "images/group-flame.jpg",
         meta: [
-          { label: "When",     value: "7:00&ndash;9:00 pm &middot; Coming Soon" },
+          { label: "When",     value: "Fridays &middot; 6:00&ndash;8:00 pm" },
           { label: "Where",    value: "108B Walker Hook Road<br/>Salt Spring Island, BC" },
           { label: "Offering", value: "Book now $40 &middot; Sliding scale $30&ndash;$40 cash at the door. Space is limited — please arrive early." }
         ],
-        lead: "Step into a sanctuary — a space where breath becomes medicine and your inner wisdom keeper becomes the guide.",
+        lead: "Step into a sanctuary &mdash; a space where breath becomes medicine and your inner wisdom keeper becomes the guide.",
         body: [
           "Conscious connected breath is a gentle yet powerful technique that invites you to access deeper states of awareness, emotional release, and energetic alignment. We begin to revitalize our minds and bodies, gain clarity and insight, and orient ourselves toward healing and transformation in the midst of the storm.",
           "Layered with the vibrations of sound healing, this experience becomes a full-body reset. The frequencies work on a cellular level to shift stagnant energy, restore harmony, and support the nervous system in finding peace. Together, breath and sound create a deeply restorative journey — one that invites you to surrender, remember, and return to your natural rhythm.",
           "Come as you are. Leave lighter, clearer, and more connected."
         ],
+        calendar: true,
         sections: [
           { title: "What to bring",
             items: [
@@ -1013,6 +1121,67 @@
       }
     };
 
+    
+    // --- Upcoming Sessions ---
+    // Compute next 6 Fridays at 6-8pm from today. Each row has placeholder
+    // eventbrite URL and a "reserve" action. Replace URLs when events go live.
+    function nextFridays(n) {
+      const out = [];
+      const now = new Date();
+      // Find next Friday (including today if today IS Friday & before 6pm)
+      let d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const dow = d.getDay(); // 0=Sun, 5=Fri
+      let diff = (5 - dow + 7) % 7;
+      if (diff === 0) {
+        // today is Friday — if it's already past 6pm, push to next week
+        if (now.getHours() >= 20) diff = 7;
+      }
+      d.setDate(d.getDate() + diff);
+      for (let i = 0; i < n; i++) {
+        out.push(new Date(d));
+        d.setDate(d.getDate() + 7);
+      }
+      return out;
+    }
+    function formatSessionDate(d) {
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return months[d.getMonth()] + ' ' + d.getDate();
+    }
+    function buildCalendarHTML() {
+      const fridays = nextFridays(6);
+      const rows = fridays.map(d => {
+        const dateStr = formatSessionDate(d);
+        const ymd = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        const emailSubject = encodeURIComponent('Reserve my space — Breathwork ' + dateStr);
+        const emailBody = encodeURIComponent(
+          'Hi,\n\nI would like to reserve a space for the Ancient Fire public breathwork class on Friday, ' + dateStr + ' (' + ymd + ') from 6–8pm.\n\nName:\nEmail:\nPhone:\n\nThank you!'
+        );
+        return `
+          <div class="session-row">
+            <div>
+              <div class="session-date">${dateStr}</div>
+              <div class="session-day">Friday · 6–8 pm</div>
+            </div>
+            <a class="session-reserve" href="mailto:info@ancientfire.ca?subject=${emailSubject}&body=${emailBody}">Reserve my space</a>
+            <a class="session-book" href="https://www.eventbrite.com/o/ancient-fire" target="_blank" rel="noopener">
+              Book Now <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        `;
+      }).join('');
+      return `<h3 class="section-title">Upcoming Sessions</h3>
+        <div class="af-calendar">${rows}</div>
+        <p class="af-cal-note">Tickets via Eventbrite. Or reserve your space directly and pay cash at the door.</p>`;
+    }
+
+    // Update the "next session" label on the featured card
+    (function updateNextSessionLabel(){
+      const el = document.getElementById('next-session-label');
+      if (!el) return;
+      const next = nextFridays(1)[0];
+      el.textContent = 'Next session — Friday, ' + formatSessionDate(next);
+    })();
+
     const modal    = document.getElementById('af-modal');
     const modalImg = document.getElementById('af-modal-img');
     const modalBody= document.getElementById('af-modal-body');
@@ -1087,6 +1256,7 @@
     <a href="/about">About</a>
     <a href="/who-we-are">Who We Are</a>
     <a href="/testimonials">Testimonials</a>
+    <a href="/audio">Audio</a>
     <a href="/reach-us">Reach Us</a>
     <div class="af-footer">info@ancientfire.ca</div>
   </div>
