@@ -6,7 +6,7 @@
 <title>Ancient Fire — Offerings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
 <style type="text/tailwindcss">
   @theme {
@@ -14,9 +14,106 @@
     --color-foreground: hsl(0 0% 100%);
     --color-muted-foreground: hsl(240 4% 66%);
     --color-border: hsl(0 0% 18%);
-    --font-display: 'Instrument Serif', serif;
+    --font-display: 'Geist', sans-serif;
     --font-body: 'Inter', sans-serif;
   }
+
+
+  /* -------- Mobile nav -------- */
+  .af-mobile-toggle {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    background: transparent; border: none;
+    cursor: pointer; padding: 0; margin: 0;
+    color: hsl(0 0% 100%);
+    position: relative; z-index: 60;
+  }
+  .af-mobile-toggle .bar {
+    display: block;
+    width: 22px; height: 1px;
+    background: currentColor;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+  }
+  .af-mobile-toggle .bar.t { transform: translate(-50%, -7px); }
+  .af-mobile-toggle .bar.b { transform: translate(-50%,  7px); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.t { transform: translate(-50%, 0) rotate(45deg); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.b { transform: translate(-50%, 0) rotate(-45deg); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.m { opacity: 0; }
+
+  .af-mobile-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: hsla(24, 8%, 7%, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .af-mobile-sheet[data-open="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .af-mobile-sheet a {
+    display: block;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    letter-spacing: -1px;
+    line-height: 1.3;
+    color: hsl(0 0% 100%);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  }
+  .af-mobile-sheet a em {
+    color: hsl(var(--muted-foreground, 240 4% 66%));
+    font-style: normal;
+  }
+  .af-mobile-sheet[data-open="true"] a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .af-mobile-sheet[data-open="true"] a:nth-child(1) { transition-delay: 0.10s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(2) { transition-delay: 0.16s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(3) { transition-delay: 0.22s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(4) { transition-delay: 0.28s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(5) { transition-delay: 0.34s; }
+  .af-mobile-sheet .af-sep {
+    width: 40px; height: 1px;
+    background: rgba(255,255,255,0.2);
+    margin: 1.25rem 0;
+  }
+  .af-mobile-sheet .af-footer {
+    position: absolute;
+    bottom: 2rem;
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 767px) {
+    .af-mobile-toggle { display: inline-flex; }
+    /* Hide the desktop "Begin Journey" pill on mobile — it crowds the nav */
+    nav .liquid-glass { display: none; }
+  }
+  @media (min-width: 768px) {
+    .af-mobile-sheet { display: none; }
+  }
+
 </style>
 <style>
   :root {
@@ -108,7 +205,7 @@
   }
   .ember-flicker { animation: ember-flicker 5.5s ease-in-out infinite; }
 
-  .font-display { font-family: 'Instrument Serif', serif; }
+  .font-display { font-family: 'Geist', sans-serif; }
   .font-body    { font-family: 'Inter', sans-serif; }
 
   .hairline {
@@ -287,7 +384,7 @@
     margin-bottom: 0.75rem;
   }
   .af-modal-body h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Geist', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.05;
     letter-spacing: -1px;
@@ -319,7 +416,7 @@
     font-size: 15px;
   }
   .af-modal-body .prose p.lead {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Geist', sans-serif;
     font-size: 1.4rem;
     line-height: 1.45;
     color: hsl(0 0% 96%);
@@ -476,7 +573,7 @@
     <!-- NAV -->
     <nav class="animate-fade-in">
       <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
-        <a href="/" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Instrument Serif', serif;">
+        <a href="/" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Geist', sans-serif;">
           Ancient Fire
         </a>
 
@@ -485,6 +582,7 @@
           <a href="/about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
           <a href="#" class="text-sm text-foreground transition-colors">Offerings</a>
           <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
+          <a href="/testimonials" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
           <a href="/reach-us" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
         </div>
 
@@ -492,6 +590,12 @@
           Begin Journey
         </button>
       </div>
+    
+        <button id="af-mobile-toggle" class="af-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="af-mobile-sheet">
+          <span class="bar t" aria-hidden="true"></span>
+          <span class="bar m" aria-hidden="true"></span>
+          <span class="bar b" aria-hidden="true"></span>
+        </button>
     </nav>
 
     <!-- HEADER -->
@@ -505,7 +609,7 @@
       <div class="animate-fade-rise section-eyebrow mb-8">Offerings</div>
 
       <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
-          style="font-family: 'Instrument Serif', serif; line-height: 0.95; letter-spacing: -2.46px;">
+          style="font-family: 'Geist', sans-serif; line-height: 0.95; letter-spacing: -2.46px;">
         The <em class="not-italic text-muted-foreground">practices</em> we keep, <br class="hidden sm:block"/>
         and the <em class="not-italic text-muted-foreground">fires</em> we tend.
       </h1>
@@ -527,11 +631,11 @@
         <div>
           <div class="section-eyebrow mb-3">01 — Breathwork</div>
           <h2 class="font-display text-4xl sm:text-5xl text-foreground"
-              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1px;">
+              style="font-family: 'Geist', sans-serif; line-height: 1; letter-spacing: -1px;">
             Sessions
           </h2>
         </div>
-        <div class="hidden md:block text-xs meta-label">Four ways to gather</div>
+        <div class="hidden md:block text-xs meta-label">Five ways to gather</div>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-10 md:gap-14">
@@ -548,7 +652,7 @@
             <span class="meta-label">Coming Soon</span>
           </div>
           <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
-              style="font-family: 'Instrument Serif', serif; letter-spacing: -0.5px; line-height: 1.05;">
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
             Ancient Fire<br/>
             <em class="not-italic text-muted-foreground">Breathwork.</em>
           </h3>
@@ -574,7 +678,7 @@
             <span class="meta-label">90–120 min</span>
           </div>
           <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
-              style="font-family: 'Instrument Serif', serif; letter-spacing: -0.5px; line-height: 1.05;">
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
             Private<br/>
             <em class="not-italic text-muted-foreground">Breathwork Session.</em>
           </h3>
@@ -598,7 +702,7 @@
             <span class="meta-label">2 hours</span>
           </div>
           <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
-              style="font-family: 'Instrument Serif', serif; letter-spacing: -0.5px; line-height: 1.05;">
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
             Couples<br/>
             <em class="not-italic text-muted-foreground">Breathwork Sessions.</em>
           </h3>
@@ -622,7 +726,7 @@
             <span class="meta-label">2 hours</span>
           </div>
           <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
-              style="font-family: 'Instrument Serif', serif; letter-spacing: -0.5px; line-height: 1.05;">
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
             Private Group<br/>
             <em class="not-italic text-muted-foreground">Breathwork Journeys.</em>
           </h3>
@@ -630,6 +734,32 @@
             <span>Request a date and time</span>
             <span>·</span>
             <span>Please contact us for pricing</span>
+          </div>
+          <span class="arrow-link">More Info <span class="arrow">→</span></span>
+        </a>
+
+        <!-- CARD 5 - First Responders -->
+        <a href="#" data-modal="firstResponders" class="offering-card animate-fade-rise-4 block group sm:col-span-2">
+          <div class="img-wrap mb-6" style="aspect-ratio: 16 / 7;">
+            <img src="images/offerings-hero.png" alt="Bonfire at night — nervous system restoration" loading="lazy"/>
+            <div class="img-label">first-responders</div>
+          </div>
+          <div class="flex items-center gap-4 mb-4">
+            <span class="meta-label">First Responders</span>
+            <span class="disc"></span>
+            <span class="meta-label">Trauma-Informed</span>
+          </div>
+          <h3 class="font-display text-3xl sm:text-4xl text-foreground mb-4"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px; line-height: 1.05;">
+            Breathwork for<br/>
+            <em class="not-italic text-muted-foreground">First Responders.</em>
+          </h3>
+          <div class="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm text-muted-foreground">
+            <span>Private session or small group</span>
+            <span>·</span>
+            <span>In person or online</span>
+            <span>·</span>
+            <span>Contact for details</span>
           </div>
           <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </a>
@@ -648,7 +778,7 @@
         <div>
           <div class="section-eyebrow mb-3">02 — Seasonal</div>
           <h2 class="font-display text-4xl sm:text-5xl text-foreground"
-              style="font-family: 'Instrument Serif', serif; line-height: 1; letter-spacing: -1px;">
+              style="font-family: 'Geist', sans-serif; line-height: 1; letter-spacing: -1px;">
             Workshops &amp; <em class="not-italic text-muted-foreground">Retreats.</em>
           </h2>
         </div>
@@ -664,7 +794,7 @@
           <div class="retreat-content">
             <div class="section-eyebrow mb-3" style="color: rgba(255,255,255,0.6);">Jan 31 · 1–7 pm</div>
             <h3 class="font-display text-4xl sm:text-5xl text-foreground leading-[1] tracking-tight"
-                style="font-family: 'Instrument Serif', serif;">
+                style="font-family: 'Geist', sans-serif;">
               Wild Within
             </h3>
             <p class="mt-3 text-muted-foreground text-base">
@@ -683,7 +813,7 @@
           <div class="retreat-content">
             <div class="section-eyebrow mb-3" style="color: rgba(255,255,255,0.6);">Feb 21 · 6–9 pm</div>
             <h3 class="font-display text-4xl sm:text-5xl text-foreground leading-[1] tracking-tight"
-                style="font-family: 'Instrument Serif', serif;">
+                style="font-family: 'Geist', sans-serif;">
               Women's Breathwork<br/>
               &amp; Somatic Movement
             </h3>
@@ -701,11 +831,11 @@
       <div class="hairline mb-16"></div>
 
       <p class="animate-fade-rise font-display text-4xl sm:text-5xl md:text-6xl text-muted-foreground leading-[1.15]"
-         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+         style="font-family: 'Geist', sans-serif; letter-spacing: -1px;">
         Not sure where to begin?
       </p>
       <p class="animate-fade-rise-1 mt-4 font-display text-4xl sm:text-5xl md:text-6xl text-foreground leading-[1.15]"
-         style="font-family: 'Instrument Serif', serif; letter-spacing: -1px;">
+         style="font-family: 'Geist', sans-serif; letter-spacing: -1px;">
         Write to us. We'll <em class="not-italic text-muted-foreground">meet you there.</em>
       </p>
 
@@ -850,6 +980,36 @@
           "Expect laughter, tears, breakthroughs, and a profound sense of connection — not just with each other, but with yourselves. It's a journey of remembering who you are, together."
         ],
         cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Private%20Group%20Breathwork%20Journey" }
+      },
+
+      firstResponders: {
+        eyebrow: "Trauma-Informed Breathwork",
+        title: "Breathwork for<br/><em class='not-italic text-muted-foreground'>First Responders.</em>",
+        img: "images/offerings-hero.png",
+        meta: [
+          { label: "Format",   value: "Private session or small group<br/>In person or online" },
+          { label: "Approach", value: "Trauma-informed breathwork paired with somatic awareness &mdash; guided at your own pace." },
+          { label: "Offering", value: "Please contact us for details.<br/>Email to request dates and time." }
+        ],
+        lead: "If your nervous system has been living in 'go mode', this is your invitation to slow down &mdash; without stopping your life.",
+        body: [
+          "When everything is asking you to go faster, pausing becomes a discipline, not a luxury.",
+          "Trauma and chronic stress can become stored in the body, keeping the nervous system stuck in survival mode. This private breathwork experience gently guides your body back into a state of safety, balance, and emotional release.",
+          "This is trauma-informed breathwork, coupled with somatic awareness, guided by your own innate wisdom. You are encouraged to go as deep as you feel safe. These sessions are designed to unwind stored tension, regulate the nervous system, release all that is ready to let go, and restore clarity and vitality.",
+          "This work is gentle, supportive, and guided at your own pace."
+        ],
+        sections: [
+          { title: "Many clients experience",
+            items: [
+              "Reduced anxiety and overwhelm.",
+              "Emotional release.",
+              "Clarity.",
+              "Nervous system regulation.",
+              "A deeper connection with the body and the world around them."
+            ]
+          }
+        ],
+        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Breathwork%20for%20First%20Responders" }
       }
     };
 
@@ -917,6 +1077,41 @@
       if (e.key === 'Escape' && modal.classList.contains('open')) close();
     });
   })();
+  </script>
+
+
+  <!-- Mobile menu sheet -->
+  <div id="af-mobile-sheet" class="af-mobile-sheet" data-open="false" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/offerings">Offerings</a>
+    <a href="/about">About</a>
+    <a href="/who-we-are">Who We Are</a>
+    <a href="/testimonials">Testimonials</a>
+    <a href="/reach-us">Reach Us</a>
+    <div class="af-footer">info@ancientfire.ca</div>
+  </div>
+  <script>
+    (function(){
+      const sheet = document.getElementById('af-mobile-sheet');
+      const btn = document.getElementById('af-mobile-toggle');
+      if (!sheet || !btn) return;
+      function setOpen(open){
+        sheet.setAttribute('data-open', open ? 'true' : 'false');
+        sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      btn.addEventListener('click', () => {
+        const isOpen = sheet.getAttribute('data-open') === 'true';
+        setOpen(!isOpen);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+      sheet.addEventListener('click', e => {
+        if (e.target.tagName === 'A') setOpen(false);
+      });
+    })();
   </script>
 
 </body>
