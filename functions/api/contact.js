@@ -1,15 +1,17 @@
 // Cloudflare Pages Function — POST /api/contact
 // Sends contact-form submissions to info@ancientfire.ca via Resend.
 //
-// Required environment variable (set in Cloudflare Pages dashboard):
-//   RESEND_API_KEY  — your Resend API key
+// Required environment variables (set in Cloudflare Pages dashboard):
+//   RESEND_API_KEY         — your Resend API key
+//   TURNSTILE_SECRET_KEY   — Cloudflare Turnstile secret (not the site key)
 //
 // Spam protection layers:
-//   1. Method + content-type guard
-//   2. Honeypot field ("website" — must be empty)
-//   3. Submission timing (must be >= 3s after the form rendered)
-//   4. Field length + basic email shape validation
-//   5. Lightweight per-IP rate limit (5 req / 10 min) via Cache API
+//   1. Cloudflare Turnstile (bot/human verification)
+//   2. Method + content-type guard
+//   3. Honeypot field ("website" — must be empty)
+//   4. Submission timing (must be >= 3s after the form rendered)
+//   5. Field length + basic email shape validation
+//   6. Lightweight per-IP rate limit (5 req / 10 min) via Cache API
 
 const TO_ADDRESS = "info@ancientfire.ca";
 const FROM_ADDRESS = "Ancient Fire <info@ancientfire.ca>";
@@ -82,6 +84,7 @@ export async function onRequestPost({ request, env }) {
   const phone = (body.phone || "").toString().trim();
   const message = (body.message || "").toString().trim();
   const website = (body.website || "").toString();   // honeypot
+  const turnstileToken = (body.turnstileToken || "").toString();
   const startedAt = Number(body.startedAt) || 0;
 
   // Honeypot
@@ -106,6 +109,34 @@ export async function onRequestPost({ request, env }) {
   }
   if (!message || message.length > MAX_MESSAGE) {
     return json(400, { ok: false, error: "Please include a message." });
+  }
+
+  // Turnstile verification
+  if (!env.TURNSTILE_SECRET_KEY) {
+    return json(500, { ok: false, error: "Verification service is not configured." });
+  }
+  if (!turnstileToken) {
+    return json(400, { ok: false, error: "Please complete the verification." });
+  }
+  const clientIp =
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-forwarded-for") ||
+    "";
+  const verifyRes = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET_KEY,
+        response: turnstileToken,
+        remoteip: clientIp,
+      }),
+    }
+  );
+  const verify = await verifyRes.json().catch(() => ({}));
+  if (!verify.success) {
+    return json(400, { ok: false, error: "Verification failed. Please try again." });
   }
 
   if (!env.RESEND_API_KEY) {

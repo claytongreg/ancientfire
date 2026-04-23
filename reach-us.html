@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script><style>/*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
@@ -698,6 +699,18 @@
   }
   .af-field input::placeholder,
   .af-field textarea::placeholder { color: rgba(255,255,255,0.25); }
+  /* Kill Chrome/Safari autofill yellow/white background */
+  .af-field input:-webkit-autofill,
+  .af-field input:-webkit-autofill:hover,
+  .af-field input:-webkit-autofill:focus,
+  .af-field input:-webkit-autofill:active,
+  .af-field textarea:-webkit-autofill {
+    -webkit-text-fill-color: hsl(0 0% 98%) !important;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    caret-color: hsl(0 0% 98%);
+    transition: background-color 9999s ease-in-out 0s;
+  }
   /* Honeypot — hidden from humans, visible to naive bots */
   .af-hp {
     position: absolute !important;
@@ -874,6 +887,12 @@
           <input id="af-website" name="website" type="text" tabindex="-1" autocomplete="off">
         </div>
 
+        <!-- Cloudflare Turnstile — replace data-sitekey with your production site key -->
+        <div id="af-turnstile" class="cf-turnstile"
+             data-sitekey="0x4AAAAAADB27k_mlaQr-fYW"
+             data-theme="dark"
+             data-size="flexible"></div>
+
         <div class="af-actions">
           <div id="af-status" class="af-status" role="status" aria-live="polite"></div>
           <button id="af-submit" class="af-submit" type="submit">Send message</button>
@@ -966,12 +985,23 @@
         setStatus('Sending…', null);
         submitBtn.disabled = true;
 
+        const turnstileToken =
+          (window.turnstile && window.turnstile.getResponse())
+          || (form.querySelector('[name="cf-turnstile-response"]') || {}).value
+          || '';
+
+        if (!turnstileToken) {
+          setStatus('Please complete the verification.', 'error');
+          return;
+        }
+
         const payload = {
           name: form.name.value.trim(),
           email: form.email.value.trim(),
           phone: form.phone.value.trim(),
           message: form.message.value.trim(),
           website: form.website.value,   // honeypot
+          turnstileToken,
           startedAt,
         };
 
@@ -992,6 +1022,7 @@
           setStatus('Network error. Please try again.', 'error');
         } finally {
           submitBtn.disabled = false;
+          if (window.turnstile) window.turnstile.reset('#af-turnstile');
         }
       });
     })();
