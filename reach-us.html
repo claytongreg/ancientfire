@@ -652,6 +652,93 @@
     .contact-row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem 0; }
   }
 
+  /* Contact form */
+  .af-form {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .af-field { display: flex; flex-direction: column; gap: 0.5rem; }
+  .af-field label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .af-field label .opt {
+    text-transform: none;
+    letter-spacing: 0.04em;
+    margin-left: 0.5rem;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+  }
+  .af-field input,
+  .af-field textarea {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.05rem;
+    color: hsl(0 0% 98%);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    padding: 0.5rem 0;
+    outline: none;
+    transition: border-color 0.25s ease;
+    width: 100%;
+  }
+  .af-field textarea {
+    min-height: 8rem;
+    line-height: 1.55;
+    resize: vertical;
+  }
+  .af-field input:focus,
+  .af-field textarea:focus {
+    border-bottom-color: rgba(255,255,255,0.7);
+  }
+  .af-field input::placeholder,
+  .af-field textarea::placeholder { color: rgba(255,255,255,0.25); }
+  /* Honeypot — hidden from humans, visible to naive bots */
+  .af-hp {
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+  .af-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .af-submit {
+    font-family: 'Geist', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: hsl(0 0% 100%);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  }
+  .af-submit:hover { border-color: hsl(0 0% 100%); }
+  .af-submit:disabled { opacity: 0.5; cursor: wait; }
+  .af-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: hsl(var(--muted-foreground));
+    min-height: 1.2em;
+  }
+  .af-status[data-state="error"] { color: hsl(12, 80%, 70%); }
+  .af-status[data-state="ok"] { color: hsl(0 0% 98%); }
+
   /* Map frame */
   .map-wrap {
     position: relative;
@@ -753,6 +840,47 @@
       </div>
     </section>
 
+    <!-- CONTACT FORM -->
+    <section class="max-w-5xl mx-auto px-8 pb-16 md:pb-20">
+      <div class="hairline mb-10"></div>
+      <div class="flex items-baseline justify-between mb-6">
+        <div class="meta-label">Send a note</div>
+      </div>
+
+      <form id="af-contact-form" class="af-form" novalidate>
+        <div class="af-field">
+          <label for="af-name">Name</label>
+          <input id="af-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="Your name">
+        </div>
+
+        <div class="af-field">
+          <label for="af-email">Email</label>
+          <input id="af-email" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com">
+        </div>
+
+        <div class="af-field">
+          <label for="af-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="af-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="(250) 555-0100">
+        </div>
+
+        <div class="af-field">
+          <label for="af-message">Message</label>
+          <textarea id="af-message" name="message" required maxlength="5000" placeholder="What's on your mind?"></textarea>
+        </div>
+
+        <!-- Honeypot — must remain empty -->
+        <div class="af-hp" aria-hidden="true">
+          <label for="af-website">Website</label>
+          <input id="af-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="af-actions">
+          <div id="af-status" class="af-status" role="status" aria-live="polite"></div>
+          <button id="af-submit" class="af-submit" type="submit">Send message</button>
+        </div>
+      </form>
+    </section>
+
     <!-- MAP -->
     <section class="max-w-5xl mx-auto px-8 pb-24 md:pb-32">
       <div class="flex items-baseline justify-between mb-6">
@@ -815,6 +943,56 @@
       });
       sheet.addEventListener('click', e => {
         if (e.target.tagName === 'A') setOpen(false);
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const form = document.getElementById('af-contact-form');
+      if (!form) return;
+      const statusEl = document.getElementById('af-status');
+      const submitBtn = document.getElementById('af-submit');
+      const startedAt = Date.now();
+
+      function setStatus(text, state) {
+        statusEl.textContent = text || '';
+        if (state) statusEl.setAttribute('data-state', state);
+        else statusEl.removeAttribute('data-state');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setStatus('Sending…', null);
+        submitBtn.disabled = true;
+
+        const payload = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          message: form.message.value.trim(),
+          website: form.website.value,   // honeypot
+          startedAt,
+        };
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data.ok) {
+            form.reset();
+            setStatus('Thank you — your message is on its way.', 'ok');
+          } else {
+            setStatus(data.error || 'Something went wrong. Please try again.', 'error');
+          }
+        } catch (err) {
+          setStatus('Network error. Please try again.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+        }
       });
     })();
   </script>
