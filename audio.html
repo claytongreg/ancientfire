@@ -235,14 +235,23 @@
     background: rgba(255,255,255,0.08);
     border-radius: 999px;
     cursor: pointer;
+    touch-action: none;
+    /* Larger invisible hit area for easier grabbing */
+    padding: 14px 0;
+    margin: -14px 0;
+    background-clip: content-box;
   }
   .scrubber .filled {
-    position: absolute; inset: 0 auto 0 0;
+    position: absolute; left: 0; right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3px;
     width: 0%;
     background: linear-gradient(90deg, hsl(22 90% 60%) 0%, hsl(0 0% 95%) 100%);
     border-radius: 999px;
     transition: width 0.1s linear;
   }
+  .scrubber.dragging .filled { transition: none; }
   .scrubber .knob {
     position: absolute;
     left: 0%;
@@ -253,10 +262,12 @@
     background: hsl(0 0% 98%);
     box-shadow: 0 1px 6px rgba(0,0,0,0.5);
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
   .scrubber:hover .knob,
+  .scrubber.dragging .knob,
   .player[data-playing="true"] .scrubber .knob { opacity: 1; }
+  .scrubber.dragging .knob { transform: translate(-50%, -50%) scale(1.25); }
 
   .time-row {
     display: flex; justify-content: space-between;
@@ -555,19 +566,72 @@
         durEl.textContent = fmt(audio.duration);
       });
       audio.addEventListener('timeupdate', () => {
+        if (isDragging) return;
         const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
         filled.style.width = pct + '%';
         knob.style.left = pct + '%';
         curEl.textContent = fmt(audio.currentTime);
       });
 
-      function seekFromEvent(e){
+      let isDragging = false;
+      let wasPlaying = false;
+
+      function pctFromEvent(e){
         const rect = scrub.getBoundingClientRect();
-        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-        const pct = Math.max(0, Math.min(1, x / rect.width));
+        const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX
+                      : (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX
+                      : e.clientX;
+        const x = clientX - rect.left;
+        return Math.max(0, Math.min(1, x / rect.width));
+      }
+
+      function previewAt(pct){
+        // Visually reflect the drag position without committing currentTime yet
+        filled.style.width = (pct * 100) + '%';
+        knob.style.left = (pct * 100) + '%';
+        if (audio.duration) curEl.textContent = fmt(audio.duration * pct);
+      }
+
+      function commitSeek(pct){
         if (audio.duration) audio.currentTime = audio.duration * pct;
       }
-      scrub.addEventListener('click', seekFromEvent);
+
+      function onPointerDown(e){
+        if (e.button !== undefined && e.button !== 0) return; // left-click only
+        isDragging = true;
+        wasPlaying = !audio.paused;
+        scrub.classList.add('dragging');
+        // Pause while scrubbing for a smoother experience
+        if (wasPlaying) audio.pause();
+        const pct = pctFromEvent(e);
+        previewAt(pct);
+        e.preventDefault();
+      }
+      function onPointerMove(e){
+        if (!isDragging) return;
+        const pct = pctFromEvent(e);
+        previewAt(pct);
+        e.preventDefault();
+      }
+      function onPointerUp(e){
+        if (!isDragging) return;
+        const pct = pctFromEvent(e);
+        commitSeek(pct);
+        isDragging = false;
+        scrub.classList.remove('dragging');
+        if (wasPlaying) audio.play();
+      }
+
+      // Mouse
+      scrub.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      // Touch
+      scrub.addEventListener('touchstart', onPointerDown, { passive: false });
+      window.addEventListener('touchmove', onPointerMove, { passive: false });
+      window.addEventListener('touchend', onPointerUp);
+      window.addEventListener('touchcancel', onPointerUp);
 
       // Error handling: if MP3 missing, show inline note
       audio.addEventListener('error', () => {
