@@ -947,10 +947,10 @@
       </p>
 
       <div class="animate-fade-rise-2 mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="mailto:info@ancientfire.ca"
+        <a href="/reach-us"
            class="liquid-glass inline-block rounded-full px-10 py-4 text-base text-foreground"
            style="text-decoration: none;">
-          info@ancientfire.ca
+          Reach Us
         </a>
         <a href="#"
            class="inline-block px-8 py-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -965,8 +965,7 @@
       <div class="hairline mb-12"></div>
       <p class="text-xs sm:text-sm uppercase text-muted-foreground/80 leading-relaxed"
          style="letter-spacing: 0.22em;">
-        Ancient Fire · Salt Spring Island <br class="hidden sm:block"/>
-        info@ancientfire.ca
+        Ancient Fire · Salt Spring Island
       </p>
     </footer>
 
@@ -1031,7 +1030,7 @@
             ]
           }
         ],
-        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Ancient%20Fire%20Breathwork" }
+        cta: { label: "Reach Us to Book", href: "/reach-us" }
       },
 
       private: {
@@ -1049,7 +1048,7 @@
           "Each session is intuitively led and trauma-informed, allowing you to feel safe, supported, and free to go as deep as your soul is ready for. This is your time — to unravel, to remember, to rise.",
           "Private sessions are offered by Amber."
         ],
-        cta: { label: "Email Amber", href: "mailto:info@ancientfire.ca?subject=One-on-One%20Breathwork%20Session" }
+        cta: { label: "Reach Amber", href: "/reach-us" }
       },
 
       couples: {
@@ -1067,7 +1066,7 @@
           "Through guided breath, intention, and conscious connection, you'll explore new levels of intimacy, communication, and emotional release. This is a beautiful space for re-connection, repair, and rooted love — breathing not only with, but for each other.",
           "Sessions are offered by Amber."
         ],
-        cta: { label: "Email Amber", href: "mailto:info@ancientfire.ca?subject=Couples%20Breathwork%20Session" }
+        cta: { label: "Reach Amber", href: "/reach-us" }
       },
 
       privateGroup: {
@@ -1087,7 +1086,7 @@
           "This experience may include guided intention setting, somatic movement, sound healing, and grounding integration to deepen the journey. Each session is intuitively tailored to your group's energy, needs, and shared intention.",
           "Expect laughter, tears, breakthroughs, and a profound sense of connection — not just with each other, but with yourselves. It's a journey of remembering who you are, together."
         ],
-        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Private%20Group%20Breathwork%20Journey" }
+        cta: { label: "Reach Us to Book", href: "/reach-us" }
       },
 
       firstResponders: {
@@ -1117,7 +1116,7 @@
             ]
           }
         ],
-        cta: { label: "Email to Book", href: "mailto:info@ancientfire.ca?subject=Breathwork%20for%20First%20Responders" }
+        cta: { label: "Reach Us to Book", href: "/reach-us" }
       }
     };
 
@@ -1152,17 +1151,13 @@
       const rows = saturdays.map(d => {
         const dateStr = formatSessionDate(d);
         const ymd = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-        const emailSubject = encodeURIComponent('Reserve my space — Breathwork ' + dateStr);
-        const emailBody = encodeURIComponent(
-          'Hi,\n\nI would like to reserve a space for the Ancient Fire public breathwork class on Saturday, ' + dateStr + ' (' + ymd + ') from 6–8pm.\n\nName:\nEmail:\nPhone:\n\nThank you!'
-        );
         return `
           <div class="session-row">
             <div>
               <div class="session-date">${dateStr}</div>
               <div class="session-day">Saturday · 6–8 pm</div>
             </div>
-            <a class="session-reserve" href="mailto:info@ancientfire.ca?subject=${emailSubject}&body=${emailBody}">Reserve my space</a>
+            <a class="session-reserve" href="/reach-us">Reserve my space</a>
             <a class="session-book" href="https://www.eventbrite.com/o/ancient-fire" target="_blank" rel="noopener">
               Book Now <span aria-hidden="true">→</span>
             </a>
@@ -1218,7 +1213,7 @@
         </div>
         ${renderSections(d.sections)}
         <div class="af-modal-footer">
-          <div class="contact">Contact &middot; <a class="mail" href="mailto:info@ancientfire.ca">info@ancientfire.ca</a></div>
+          <div class="contact">Contact &middot; <a class="mail" href="/reach-us">Reach Us</a></div>
           ${d.cta ? `<a class="cta" href="${d.cta.href}">${d.cta.label} →</a>` : ''}
         </div>
       `;
@@ -1258,7 +1253,6 @@
     <a href="/testimonials">Testimonials</a>
     <a href="/audio">Audio</a>
     <a href="/reach-us">Reach Us</a>
-    <div class="af-footer">info@ancientfire.ca</div>
   </div>
   <script>
     (function(){
