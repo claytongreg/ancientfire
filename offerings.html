@@ -755,7 +755,7 @@
           <div class="flex items-center gap-4 mb-4 flex-wrap">
             <span class="meta-label">Weekly · Public</span>
             <span class="disc"></span>
-            <span class="meta-label" id="next-session-label">Next session — Friday</span>
+            <span class="meta-label" id="next-session-label">Next session — Saturday</span>
           </div>
           <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-foreground mb-5"
               style="font-family: 'Geist', sans-serif; letter-spacing: -1px; line-height: 1.02;">
@@ -763,7 +763,7 @@
             <em class="not-italic text-muted-foreground">Public Breathwork Class.</em>
           </h3>
           <p class="max-w-xl text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-            Fridays, 6:00–8:00pm. Drop into a sanctuary of breath, sound, and community — every week on Salt Spring Island.
+            Saturdays, 6:00–8:00pm. Drop into a sanctuary of breath, sound, and community — every week on Salt Spring Island.
           </p>
           <div class="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm text-muted-foreground">
             <span><span class="text-foreground">6:00–8:00</span> pm</span>
@@ -990,7 +990,7 @@
         title: "Ancient Fire Weekly<br/><em class='not-italic text-muted-foreground'>Public Breathwork Class.</em>",
         img: "images/group-flame.jpg",
         meta: [
-          { label: "When",     value: "Fridays &middot; 6:00&ndash;8:00 pm" },
+          { label: "When",     value: "Saturdays &middot; 6:00&ndash;8:00 pm" },
           { label: "Where",    value: "108B Walker Hook Road<br/>Salt Spring Island, BC" },
           { label: "Offering", value: "Book now $40 &middot; Sliding scale $30&ndash;$40 cash at the door. Space is limited — please arrive early." }
         ],
@@ -1123,17 +1123,17 @@
 
     
     // --- Upcoming Sessions ---
-    // Compute next 6 Fridays at 6-8pm from today. Each row has placeholder
+    // Compute next 6 Saturdays at 6-8pm from today. Each row has placeholder
     // eventbrite URL and a "reserve" action. Replace URLs when events go live.
-    function nextFridays(n) {
+    function nextSaturdays(n) {
       const out = [];
       const now = new Date();
-      // Find next Friday (including today if today IS Friday & before 6pm)
+      // Find next Saturday (including today if today IS Saturday & before 6pm)
       let d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const dow = d.getDay(); // 0=Sun, 5=Fri
-      let diff = (5 - dow + 7) % 7;
+      const dow = d.getDay(); // 0=Sun, 6=Sat
+      let diff = (6 - dow + 7) % 7;
       if (diff === 0) {
-        // today is Friday — if it's already past 6pm, push to next week
+        // today is Saturday — if it's already past 6pm, push to next week
         if (now.getHours() >= 20) diff = 7;
       }
       d.setDate(d.getDate() + diff);
@@ -1148,19 +1148,19 @@
       return months[d.getMonth()] + ' ' + d.getDate();
     }
     function buildCalendarHTML() {
-      const fridays = nextFridays(6);
-      const rows = fridays.map(d => {
+      const saturdays = nextSaturdays(6);
+      const rows = saturdays.map(d => {
         const dateStr = formatSessionDate(d);
         const ymd = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
         const emailSubject = encodeURIComponent('Reserve my space — Breathwork ' + dateStr);
         const emailBody = encodeURIComponent(
-          'Hi,\n\nI would like to reserve a space for the Ancient Fire public breathwork class on Friday, ' + dateStr + ' (' + ymd + ') from 6–8pm.\n\nName:\nEmail:\nPhone:\n\nThank you!'
+          'Hi,\n\nI would like to reserve a space for the Ancient Fire public breathwork class on Saturday, ' + dateStr + ' (' + ymd + ') from 6–8pm.\n\nName:\nEmail:\nPhone:\n\nThank you!'
         );
         return `
           <div class="session-row">
             <div>
               <div class="session-date">${dateStr}</div>
-              <div class="session-day">Friday · 6–8 pm</div>
+              <div class="session-day">Saturday · 6–8 pm</div>
             </div>
             <a class="session-reserve" href="mailto:info@ancientfire.ca?subject=${emailSubject}&body=${emailBody}">Reserve my space</a>
             <a class="session-book" href="https://www.eventbrite.com/o/ancient-fire" target="_blank" rel="noopener">
@@ -1178,8 +1178,8 @@
     (function updateNextSessionLabel(){
       const el = document.getElementById('next-session-label');
       if (!el) return;
-      const next = nextFridays(1)[0];
-      el.textContent = 'Next session — Friday, ' + formatSessionDate(next);
+      const next = nextSaturdays(1)[0];
+      el.textContent = 'Next session — Saturday, ' + formatSessionDate(next);
     })();
 
     const modal    = document.getElementById('af-modal');
