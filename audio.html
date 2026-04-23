@@ -574,13 +574,13 @@
       });
 
       let isDragging = false;
-      let wasPlaying = false;
 
       function pctFromEvent(e){
         const rect = scrub.getBoundingClientRect();
         const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX
                       : (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX
                       : e.clientX;
+        if (typeof clientX !== 'number') return null;
         const x = clientX - rect.left;
         return Math.max(0, Math.min(1, x / rect.width));
       }
@@ -598,28 +598,26 @@
 
       function onPointerDown(e){
         if (e.button !== undefined && e.button !== 0) return; // left-click only
-        isDragging = true;
-        wasPlaying = !audio.paused;
-        scrub.classList.add('dragging');
-        // Pause while scrubbing for a smoother experience
-        if (wasPlaying) audio.pause();
         const pct = pctFromEvent(e);
+        if (pct === null) return;
+        isDragging = true;
+        scrub.classList.add('dragging');
         previewAt(pct);
         e.preventDefault();
       }
       function onPointerMove(e){
         if (!isDragging) return;
         const pct = pctFromEvent(e);
+        if (pct === null) return;
         previewAt(pct);
         e.preventDefault();
       }
       function onPointerUp(e){
         if (!isDragging) return;
         const pct = pctFromEvent(e);
-        commitSeek(pct);
         isDragging = false;
         scrub.classList.remove('dragging');
-        if (wasPlaying) audio.play();
+        if (pct !== null) commitSeek(pct);
       }
 
       // Mouse
