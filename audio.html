@@ -22,12 +22,12 @@
 <script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
 <style type="text/tailwindcss">
   @theme {
-    --color-background: hsl(24 8% 10%);
-    --color-foreground: hsl(0 0% 100%);
-    --color-muted-foreground: hsl(240 4% 66%);
-    --color-primary: hsl(0 0% 100%);
-    --color-primary-foreground: hsl(0 0% 4%);
-    --color-border: hsl(0 0% 18%);
+    --color-background: hsl(36 50% 96%);
+    --color-foreground: hsl(24 11% 9%);
+    --color-muted-foreground: hsl(30 6% 32%);
+    --color-primary: #1c1917;
+    --color-primary-foreground: #eee6d4;
+    --color-border: #d4ccb8;
     --font-display: 'Geist', sans-serif;
     --font-body: 'Inter', sans-serif;
   }
@@ -39,7 +39,7 @@
     align-items: center; justify-content: center;
     background: transparent; border: none;
     cursor: pointer; padding: 0; margin: 0;
-    color: hsl(0 0% 100%);
+    color: #1c1917;
     position: relative; z-index: 60;
   }
   .af-mobile-toggle .bar {
@@ -71,7 +71,7 @@
     font-family: 'Geist', sans-serif;
     font-size: clamp(2rem, 7vw, 2.75rem);
     letter-spacing: -1px; line-height: 1.3;
-    color: hsl(0 0% 100%); text-decoration: none;
+    color: #1c1917; text-decoration: none;
     padding: 0.5rem 0;
     opacity: 0; transform: translateY(10px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -89,7 +89,7 @@
     position: absolute; bottom: 2rem;
     font-family: ui-monospace, monospace;
     font-size: 11px; letter-spacing: 0.24em;
-    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; color: rgba(28, 25, 23, 0.45);
   }
 
   @media (max-width: 767px) {
@@ -100,9 +100,9 @@
 </style>
 <style>
   :root {
-    --background: 24 8% 10%;
-    --foreground: 0 0% 100%;
-    --muted-foreground: 240 4% 66%;
+    --background: 36 50% 96%;
+    --foreground: 24 11% 9%;
+    --muted-foreground: 30 6% 32%;
     --border: 0 0% 18%;
   }
 
@@ -119,9 +119,9 @@
     background:
       radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
       radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
-      radial-gradient(ellipse at 20% 10%, hsla(24, 10%, 16%, 0.6) 0%, transparent 55%),
-      radial-gradient(ellipse at 85% 15%, hsla(24, 8%, 12%, 0.7) 0%, transparent 60%),
-      linear-gradient(180deg, hsl(24 8% 8%) 0%, hsl(24 8% 10%) 45%, hsl(12 40% 8%) 100%);
+      radial-gradient(ellipse at 20% 10%, rgba(238, 230, 212, 0.7) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(243, 237, 224, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, #f3ede0 0%, #fbf8f0 45%, #f6f0e2 100%);
   }
   .ember-grain {
     position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -130,21 +130,21 @@
   }
 
   .liquid-glass {
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(28, 25, 23, 0.02);
     backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 1px rgba(28, 25, 23, 0.10);
     position: relative; overflow: hidden;
     transition: transform 0.3s ease;
-    cursor: pointer; color: hsl(0 0% 100%);
+    cursor: pointer; color: #1c1917;
   }
   .liquid-glass::before {
     content: ''; position: absolute; inset: 0; border-radius: inherit;
     padding: 1.4px;
     background: linear-gradient(180deg,
-      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
-      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      rgba(28, 25, 23, 0.5) 0%, rgba(28, 25, 23, 0.14) 20%,
+      rgba(28, 25, 23, 0) 40%, rgba(28, 25, 23, 0) 60%,
+      rgba(28, 25, 23, 0.14) 80%, rgba(28, 25, 23, 0.5) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
     pointer-events: none;
@@ -174,7 +174,7 @@
 
   .hairline {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(28, 25, 23, 0.28) 50%, transparent 100%);
   }
 
   .section-eyebrow {
@@ -188,8 +188,8 @@
     position: relative;
     border-radius: 10px;
     padding: 2.5rem 2rem 2rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(28, 25, 23, 0.03) 0%, rgba(28, 25, 23, 0.02) 100%);
+    border: 1px solid rgba(28, 25, 23, 0.08);
     overflow: hidden;
   }
   .player::before {
@@ -205,7 +205,7 @@
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1.1;
     letter-spacing: -0.5px;
-    color: hsl(0 0% 98%);
+    color: #1c1917;
   }
   .player-kicker {
     font-family: 'Inter', sans-serif;
@@ -226,15 +226,15 @@
     flex: none;
     width: 64px; height: 64px;
     border-radius: 999px;
-    background: hsl(0 0% 98%);
-    color: hsl(24 8% 10%);
+    background: #1c1917;
+    color: #fbf8f0;
     border: none;
     display: grid; place-items: center;
     cursor: pointer;
     transition: transform 0.25s ease, background 0.2s ease;
     box-shadow: 0 2px 20px rgba(255, 200, 150, 0.25);
   }
-  .play-btn:hover { transform: scale(1.05); background: hsl(0 0% 100%); }
+  .play-btn:hover { transform: scale(1.05); background: #1c1917; }
   .play-btn svg { width: 22px; height: 22px; }
   .play-btn .pause-icon { display: none; }
   .player[data-playing="true"] .play-btn .play-icon { display: none; }
@@ -244,7 +244,7 @@
   .scrubber {
     position: relative;
     height: 3px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(28, 25, 23, 0.08);
     border-radius: 999px;
     cursor: pointer;
     touch-action: none;
@@ -259,7 +259,7 @@
     transform: translateY(-50%);
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, hsl(22 90% 60%) 0%, hsl(0 0% 95%) 100%);
+    background: linear-gradient(90deg, hsl(22 90% 60%) 0%, #1c1917 100%);
     border-radius: 999px;
     transition: width 0.1s linear;
   }
@@ -271,8 +271,8 @@
     transform: translate(-50%, -50%);
     width: 14px; height: 14px;
     border-radius: 999px;
-    background: hsl(0 0% 98%);
-    box-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    background: #1c1917;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
@@ -295,25 +295,25 @@
     display: flex; align-items: center; gap: 1rem;
     padding: 1.25rem 1.5rem;
     border-radius: 8px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: hsl(0 0% 95%);
+    background: rgba(28, 25, 23, 0.02);
+    border: 1px solid rgba(28, 25, 23, 0.08);
+    color: #1c1917;
     text-decoration: none;
     transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
   }
   .download-card:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
+    border-color: rgba(28, 25, 23, 0.18);
+    background: rgba(28, 25, 23, 0.04);
     transform: translateY(-2px);
   }
   .download-card .icon {
     flex: none;
     width: 40px; height: 40px;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(28, 25, 23, 0.14);
     display: grid; place-items: center;
   }
-  .download-card .label { font-size: 14px; color: hsl(0 0% 98%); }
+  .download-card .label { font-size: 14px; color: #1c1917; }
   .download-card .sub { font-size: 12px; color: hsl(var(--muted-foreground)); margin-top: 2px; }
 
   /* Instructions list */
@@ -326,13 +326,13 @@
     .steps { grid-template-columns: repeat(3, 1fr); }
   }
   .step {
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(28, 25, 23, 0.10);
     padding-top: 1.25rem;
   }
   .step .n {
     font-family: 'Geist', sans-serif;
     font-size: 2rem; line-height: 1;
-    color: hsl(0 0% 98%);
+    color: #1c1917;
     margin-bottom: 0.75rem;
     letter-spacing: -1px;
   }
@@ -340,7 +340,7 @@
     font-size: 13px;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: hsl(0 0% 92%);
+    color: #1c1917;
     margin-bottom: 0.5rem;
   }
   .step p { color: hsl(var(--muted-foreground)); font-size: 14px; line-height: 1.6; }
@@ -351,7 +351,7 @@
     font-size: clamp(1.5rem, 2.5vw, 2.25rem);
     line-height: 1.25;
     letter-spacing: -0.4px;
-    color: hsl(0 0% 92%);
+    color: #1c1917;
   }
 </style>
 </head>

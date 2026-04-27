@@ -3,58 +3,43 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ancient Fire — Where stories return to the fire.</title>
-<meta name="description" content="A living dojo on Salt Spring Island offering breathwork, martial arts, and ceremony. Gather, inspire, and thrive with Amber & Jesse Blue.">
-<link rel="canonical" href="https://ancientfire.ca/">
-<meta property="og:title" content="Ancient Fire — Where stories return to the fire.">
-<meta property="og:description" content="A living dojo on Salt Spring Island offering breathwork, martial arts, and ceremony. Gather, inspire, and thrive with Amber & Jesse Blue.">
-<meta property="og:image" content="https://ancientfire.ca/images/offerings-hero.png">
-<meta property="og:url" content="https://ancientfire.ca/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Ancient Fire">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ancient Fire — Where stories return to the fire.">
-<meta name="twitter:description" content="A living dojo on Salt Spring Island offering breathwork, martial arts, and ceremony. Gather, inspire, and thrive with Amber & Jesse Blue.">
-<meta name="twitter:image" content="https://ancientfire.ca/images/offerings-hero.png">
+<title>Ancient Fire — Light Theme</title>
+<meta name="description" content="A living dojo on Salt Spring Island offering breathwork, martial arts, and ceremony.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
 <style type="text/tailwindcss">
   @theme {
-    --color-background: hsl(24 8% 10%);
-    --color-foreground: hsl(0 0% 100%);
-    --color-muted-foreground: hsl(240 4% 66%);
-    --color-primary: hsl(0 0% 100%);
-    --color-primary-foreground: hsl(0 0% 4%);
-    --color-secondary: hsl(0 0% 10%);
-    --color-muted: hsl(0 0% 10%);
-    --color-accent: hsl(0 0% 10%);
-    --color-border: hsl(0 0% 18%);
-    --color-input: hsl(0 0% 18%);
+    /* Light palette */
+    --color-background: #fbf8f0;       /* parchment */
+    --color-foreground: #1c1917;       /* ink */
+    --color-navy: #0E2A4F;             /* navy */
+    --color-gold: #B88A00;             /* ochre */
+    --color-slate: #6B7280;            /* slate */
+    --color-muted-foreground: #6B7280;
+    --color-border: rgba(28, 25, 23, 0.12);
     --font-display: 'Geist', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
   }
 
-
-  /* -------- Mobile nav -------- */
+  /* Mobile nav */
   .af-mobile-toggle {
     display: none;
     width: 44px; height: 44px;
     align-items: center; justify-content: center;
     background: transparent; border: none;
     cursor: pointer; padding: 0; margin: 0;
-    color: hsl(0 0% 100%);
+    color: #0E2A4F;
     position: relative; z-index: 60;
   }
   .af-mobile-toggle .bar {
-    display: block;
-    width: 22px; height: 1px;
-    background: currentColor;
-    position: absolute;
+    display: block; width: 22px; height: 1px;
+    background: currentColor; position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
-    transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.2s ease;
   }
   .af-mobile-toggle .bar.t { transform: translate(-50%, -7px); }
   .af-mobile-toggle .bar.b { transform: translate(-50%,  7px); }
@@ -63,293 +48,570 @@
   .af-mobile-toggle[aria-expanded="true"] .bar.m { opacity: 0; }
 
   .af-mobile-sheet {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    background: hsla(24, 8%, 7%, 0.96);
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(251, 248, 240, 0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0; pointer-events: none;
     transition: opacity 0.35s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     padding: 2rem;
   }
-  .af-mobile-sheet[data-open="true"] {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  .af-mobile-sheet[data-open="true"] { opacity: 1; pointer-events: auto; }
   .af-mobile-sheet a {
-    display: block;
-    font-family: 'Geist', sans-serif;
+    display: block; font-family: 'Geist', sans-serif;
     font-size: clamp(2rem, 7vw, 2.75rem);
-    letter-spacing: -1px;
-    line-height: 1.3;
-    color: hsl(0 0% 100%);
-    text-decoration: none;
+    letter-spacing: -1px; line-height: 1.3;
+    color: #0E2A4F; text-decoration: none;
     padding: 0.5rem 0;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
   }
-  .af-mobile-sheet a em {
-    color: hsl(var(--muted-foreground, 240 4% 66%));
-    font-style: normal;
-  }
-  .af-mobile-sheet[data-open="true"] a {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .af-mobile-sheet[data-open="true"] a:nth-child(1) { transition-delay: 0.10s; }
-  .af-mobile-sheet[data-open="true"] a:nth-child(2) { transition-delay: 0.16s; }
-  .af-mobile-sheet[data-open="true"] a:nth-child(3) { transition-delay: 0.22s; }
-  .af-mobile-sheet[data-open="true"] a:nth-child(4) { transition-delay: 0.28s; }
-  .af-mobile-sheet[data-open="true"] a:nth-child(5) { transition-delay: 0.34s; }
-  .af-mobile-sheet .af-sep {
-    width: 40px; height: 1px;
-    background: rgba(255,255,255,0.2);
-    margin: 1.25rem 0;
-  }
-  .af-mobile-sheet .af-footer {
-    position: absolute;
-    bottom: 2rem;
-    font-family: ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-  }
-
-  @media (max-width: 767px) {
-    .af-mobile-toggle { display: inline-flex; }
-    /* Hide the desktop "Begin Journey" pill on mobile — it crowds the nav */
-    nav .liquid-glass { display: none; }
-  }
-  @media (min-width: 768px) {
-    .af-mobile-sheet { display: none; }
-  }
-
-
-
-  @media (max-width: 520px) {
-    /* Gather · Inspire · Thrive row: reduce tracking so it fits */
-    .animate-fade-rise-delay.flex.items-center.justify-center.gap-6 {
-      letter-spacing: 0.22em !important;
-      gap: 0.9rem !important;
-      font-size: 11px !important;
-    }
-    .animate-fade-rise-delay.flex .h-px {
-      width: 1rem !important;
-    }
-    /* Hero title: soften size cap to avoid overflow on small screens */
-    section.relative.z-10 h1 {
-      font-size: 2.6rem !important;
-      letter-spacing: -1.2px !important;
-    }
-  }
-
+  @media (max-width: 767px) { .af-mobile-toggle { display: inline-flex; } }
+  @media (min-width: 768px) { .af-mobile-sheet { display: none; } }
 </style>
 <style>
   :root {
-    --background: 24 8% 10%;
-    --foreground: 0 0% 100%;
-    --muted-foreground: 240 4% 66%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 10%;
-    --muted: 0 0% 10%;
-    --accent: 0 0% 10%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --font-display: 'Geist', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --c-bg: #fbf8f0;
+    --c-bg-2: #f3ede0;
+    --c-bg-deep: #eee6d4;
+    --c-ink: #1c1917;
+    --c-ink-soft: #57534e;
+    --c-navy: #0E2A4F;
+    --c-navy-deep: #08172C;
+    --c-ember: #b8431f;
+    --c-ember-soft: #d97757;
+    --c-gold: #b8431f;
+    --c-gold-soft: #d97757;
+    --c-slate: #57534e;
+    --c-line: rgba(28, 25, 23, 0.12);
   }
-
   html, body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-family: var(--font-body);
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Video placeholder — replace with your <video> element */
-  .video-placeholder {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+  /* ambient parchment backdrop */
+  .parchment-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background:
-      radial-gradient(ellipse at 30% 20%, hsla(201, 80%, 25%, 0.8) 0%, transparent 55%),
-      radial-gradient(ellipse at 75% 80%, hsla(210, 60%, 18%, 0.9) 0%, transparent 60%),
-      linear-gradient(180deg, hsl(24 8% 8%) 0%, hsl(24 8% 10%) 50%, hsl(201 100% 8%) 100%);
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(217,119,87,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 100% 0%, rgba(184,67,31,0.06) 0%, transparent 70%),
+      linear-gradient(180deg, #fbf8f0 0%, #fbf8f0 50%, #f3ede0 100%);
   }
-  .video-placeholder::after {
-    content: 'video will be added here';
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+  .parchment-grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.35; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.42  0 0 0 0 0.18  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
-  /* Liquid Glass */
-  .liquid-glass {
-    background: rgba(255, 255, 255, 0.01);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
+  /* pill button */
+  .pill-ink {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--c-navy);
+    color: #EADFC8;
+    border: 1px solid var(--c-navy);
+    border-radius: 999px;
+    padding: 0.85rem 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
     cursor: pointer;
-    color: hsl(0 0% 100%);
   }
-  .liquid-glass::before {
+  .pill-ink:hover { background: var(--c-navy-deep); border-color: var(--c-navy-deep); transform: translateY(-1px); }
+  .pill-ghost {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent;
+    color: var(--c-navy);
+    border: 1px solid var(--c-navy);
+    border-radius: 999px;
+    padding: 0.65rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .pill-ghost:hover { background: var(--c-navy); color: #EADFC8; }
+
+  /* Type roles */
+  .font-display { font-family: 'Geist', sans-serif; }
+  .font-serif   { font-family: 'Cormorant Garamond', serif; }
+  .font-body    { font-family: 'Inter', sans-serif; }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--c-gold);
+  }
+  .eyebrow-slate { color: var(--c-slate); }
+
+  .ink { color: var(--c-ink); }
+  .navy { color: var(--c-ink-soft); }
+  .gold { color: var(--c-gold); }
+  .slate { color: var(--c-slate); }
+  .muted { color: var(--c-slate); }
+
+  /* Hairline divider */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(28,25,23,0.18) 50%, transparent 100%);
+  }
+
+  /* HERO */
+  .hero-wrap {
+    position: relative;
+    width: 100%;
+    padding: clamp(80px, 14vh, 160px) 0 clamp(80px, 12vh, 130px);
+    overflow: hidden;
+  }
+  /* Fire video — tinted into the parchment palette */
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-video-wrap video {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    /* Desaturate, push warm, dim — so it reads as embers under beige */
+    filter:
+      saturate(0.55)
+      sepia(0.35)
+      hue-rotate(-12deg)
+      contrast(1.05)
+      brightness(0.78);
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+  }
+  /* Beige wash + radial vignette so the video bleeds into the page */
+  .hero-video-wrap::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    padding: 1.4px;
-    background: linear-gradient(180deg,
-      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
-      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 50%, transparent 0%, rgba(251, 248, 240, 0.45) 55%, rgba(251, 248, 240, 0.92) 100%),
+      linear-gradient(180deg, rgba(251, 248, 240, 0.55) 0%, rgba(251, 248, 240, 0.25) 35%, rgba(251, 248, 240, 0.55) 75%, rgba(251, 248, 240, 0.95) 100%);
   }
-  .liquid-glass:hover {
-    transform: scale(1.03);
+  /* Gold ember tint + grain on top */
+  .hero-video-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 60%, rgba(184, 67, 31, 0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(217, 119, 87, 0.10) 0%, transparent 60%);
+    mix-blend-mode: overlay;
   }
+  .hero-glyph {
+    position: absolute; left: 50%; top: 46%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(28rem, 60vw, 56rem);
+    line-height: 1;
+    color: rgba(184, 67, 31, 0.16);
+    pointer-events: none; user-select: none;
+    z-index: 1;
+    letter-spacing: -0.05em;
+    mix-blend-mode: multiply;
+  }
+  .hero-rule {
+    width: 1px; height: 64px;
+    background: var(--c-navy);
+    margin: 0 auto 2rem;
+    opacity: 0.7;
+  }
+
+  /* Card with thin gold rule */
+  .card-light {
+    background: rgba(255, 251, 240, 0.45);
+    border: 1px solid var(--c-line);
+    transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-light:hover {
+    background: rgba(255, 251, 240, 0.78);
+    border-color: rgba(184, 67, 31, 0.35);
+    transform: translateY(-3px);
+  }
+  .card-light::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--c-gold) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .card-light:hover::after { opacity: 1; }
+
+  /* Photo card */
+  .photo-card {
+    position: relative; overflow: hidden;
+    background: #DBCCAB;
+    border: 1px solid var(--c-line);
+  }
+  .photo-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    filter: saturate(0.92) contrast(0.98);
+  }
+  .photo-card:hover img { transform: scale(1.04); }
+
+  /* aspect helpers */
+  .ar-3-2 { aspect-ratio: 3/2; }
+  .ar-1-1 { aspect-ratio: 1/1; }
+  .ar-3-4 { aspect-ratio: 3/4; }
+  .ar-16-10 { aspect-ratio: 16/10; }
 
   /* Animations */
   @keyframes fade-rise {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  .animate-fade-rise         { animation: fade-rise 0.8s ease-out both; }
-  .animate-fade-rise-delay   { animation: fade-rise 0.8s ease-out 0.2s both; }
-  .animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
-
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  .animate-fade-rise   { animation: fade-rise 0.9s ease-out both; }
+  .animate-fade-rise-1 { animation: fade-rise 0.9s ease-out 0.15s both; }
+  .animate-fade-rise-2 { animation: fade-rise 0.9s ease-out 0.30s both; }
+  .animate-fade-rise-3 { animation: fade-rise 0.9s ease-out 0.45s both; }
+  .animate-fade-rise-4 { animation: fade-rise 0.9s ease-out 0.60s both; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
   .animate-fade-in { animation: fade-in 1.2s ease-out both; }
 
-  .font-display { font-family: 'Geist', sans-serif; }
-  .font-body    { font-family: 'Inter', sans-serif; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+
+  /* Underline effect for nav */
+  .nav-link {
+    position: relative;
+    color: var(--c-ink);
+    opacity: 0.65;
+    transition: opacity 0.3s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -6px;
+    height: 1px;
+    background: var(--c-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .nav-link:hover { opacity: 1; }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link.active { opacity: 1; }
+  .nav-link.active::after { transform: scaleX(1); }
+
+  /* Quote mark */
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 6rem; line-height: 0.6;
+    color: var(--c-gold);
+    display: block;
+  }
+
+  /* Photo placeholder (for shots not yet provided) */
+  .photo-placeholder {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(184, 67, 31, 0.05) 0%, transparent 65%),
+      linear-gradient(135deg, #f3ede0 0%, #e0d3b3 100%);
+    border: 1px dashed rgba(28,25,23,0.18);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    color: var(--c-slate);
+    overflow: hidden;
+  }
+  .photo-placeholder .ph-mark {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(28,25,23,0.25);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    color: rgba(28,25,23,0.5);
+  }
+  .photo-placeholder .ph-label {
+    font-family: 'Geist', sans-serif;
+    font-size: 0.95rem;
+    color: var(--c-ink-soft);
+    margin-bottom: 0.4rem;
+  }
+  .photo-placeholder .ph-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--c-slate);
+  }
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Ancient Fire Dojo",
-  "description": "A living dojo on Salt Spring Island offering breathwork, martial arts, and ceremony.",
-  "url": "https://ancientfire.ca",
-  "email": "info@ancientfire.ca",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "108 Walker Hook Road",
-    "addressLocality": "Salt Spring Island",
-    "addressRegion": "BC",
-    "addressCountry": "CA"
-  },
-  "founder": [
-    {"@type": "Person", "name": "Amber Blue"},
-    {"@type": "Person", "name": "Jesse Blue"}
-  ],
-  "sameAs": []
-}
-</script>
 </head>
 <body class="min-h-screen overflow-x-hidden">
 
-  <div class="relative min-h-screen w-full">
+  <div class="parchment-bg" aria-hidden="true"></div>
+  <div class="parchment-grain" aria-hidden="true"></div>
 
-    <!-- BACKGROUND VIDEO -->
-    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-      <source src="video/campfire.mp4" type="video/mp4" />
-    </video>
-    <!-- subtle dark overlay for text legibility over firelight -->
-    <div class="absolute inset-0 z-[1] pointer-events-none" style="background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%);" aria-hidden="true"></div>
+  <div class="relative z-10 w-full">
 
     <!-- NAV -->
-    <nav class="relative z-10 animate-fade-in">
+    <nav class="animate-fade-in">
       <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
-        <a href="#" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Geist', sans-serif;">
+        <a href="#" class="font-display leading-none ink" style="font-size: 1.75rem; letter-spacing: -0.02em;">
           Ancient Fire
         </a>
-
-        <div class="hidden md:flex items-center gap-10">
-          <a href="/" class="text-sm text-foreground transition-colors">Home</a>
-          <a href="/offerings" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Offerings</a>
-          <a href="/about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
-          <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
-          <a href="/testimonials" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
-          <a href="/audio" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Audio</a>
-          <a href="/reach-us" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
+        <div class="hidden md:flex items-center gap-9">
+          <a href="#" class="text-sm nav-link active">Home</a>
+          <a href="#" class="text-sm nav-link">Offerings</a>
+          <a href="#" class="text-sm nav-link">About</a>
+          <a href="#" class="text-sm nav-link">The Space</a>
+          <a href="#" class="text-sm nav-link">Who We Are</a>
+          <a href="#" class="text-sm nav-link">Reach Us</a>
         </div>
-
-        <a href="/offerings" class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground" style="text-decoration: none;">
-          Begin Journey
-        </a>
+        <a href="#" class="pill-ink hidden md:inline-flex" style="padding: 0.6rem 1.5rem;">Begin Journey</a>
         <button id="af-mobile-toggle" class="af-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="af-mobile-sheet">
           <span class="bar t" aria-hidden="true"></span>
           <span class="bar m" aria-hidden="true"></span>
           <span class="bar b" aria-hidden="true"></span>
         </button>
       </div>
+      <div class="hairline max-w-7xl mx-auto" style="opacity: 0.6;"></div>
     </nav>
 
     <!-- HERO -->
-    <section class="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-32 pb-40 py-[90px]">
-      <h1
-        class="animate-fade-rise font-normal text-5xl sm:text-7xl md:text-8xl max-w-7xl text-foreground flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 gap-y-4"
-        style="font-family: 'Geist', sans-serif; line-height: 0.95; letter-spacing: -2.46px; color: rgb(247, 247, 250)"
-      >
-        <span>Gather</span>
-        <span class="h-px w-10 sm:w-16 bg-foreground/30" aria-hidden="true"></span>
-        <span>Inspire</span>
-        <span class="h-px w-10 sm:w-16 bg-foreground/30" aria-hidden="true"></span>
-        <span>Thrive</span>
-      </h1>
+    <section class="hero-wrap">
+      <div class="hero-video-wrap" aria-hidden="true">
+        <video autoplay loop muted playsinline preload="auto">
+          <source src="video/new-fire-web.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero-glyph" aria-hidden="true">火</div>
+      <div class="relative max-w-5xl mx-auto px-8 text-center" style="z-index: 2;">
+        <div class="animate-fade-rise eyebrow mb-8">Salt Spring Island · Est. by Amber &amp; Jesse Blue</div>
 
-      <p class="animate-fade-rise-delay text-muted-foreground text-base sm:text-lg max-w-2xl mt-10 leading-relaxed" style="color: rgb(248, 248, 250)">
-        A living dojo on Salt Spring Island — breath, fight, and fire held by Amber &amp; Jesse Blue, for those ready to meet themselves.
-      </p>
+        <div class="animate-fade-rise-1">
+          <div class="hero-rule" aria-hidden="true"></div>
+        </div>
 
-      <a href="/offerings" class="animate-fade-rise-delay-2 liquid-glass rounded-full px-14 py-5 text-base text-foreground mt-12 inline-block" style="text-decoration: none;">
-        Begin Journey
-      </a>
+        <h1 class="animate-fade-rise-1 font-display font-normal ink"
+            style="font-size: clamp(3rem, 8vw, 7.5rem); line-height: 0.95; letter-spacing: -0.05em;">
+          Gather <span class="font-serif italic gold" style="font-weight: 400;">·</span>
+          Inspire <span class="font-serif italic gold" style="font-weight: 400;">·</span>
+          Thrive
+        </h1>
+
+        <p class="animate-fade-rise-2 mt-10 max-w-2xl mx-auto text-base sm:text-lg leading-[1.8] navy"
+           style="opacity: 0.8;">
+          A living dojo on Salt Spring Island — breath, fight, and fire held by Amber &amp; Jesse Blue,
+          for those ready to <em class="not-italic gold">meet themselves.</em>
+        </p>
+
+        <div class="animate-fade-rise-3 mt-12 flex items-center justify-center gap-4 flex-wrap">
+          <a href="#" class="pill-ink">Begin Journey</a>
+          <a href="#" class="pill-ghost">View Offerings</a>
+        </div>
+
+        <div class="animate-fade-rise-4 mt-20 flex items-center justify-center gap-6 text-xs uppercase slate"
+             style="letter-spacing: 0.32em;">
+          <span>Breathwork</span>
+          <span class="h-px w-10" style="background: rgba(8,23,44,0.3);" aria-hidden="true"></span>
+          <span>Martial Arts</span>
+          <span class="h-px w-10" style="background: rgba(8,23,44,0.3);" aria-hidden="true"></span>
+          <span>Ceremony</span>
+        </div>
+      </div>
     </section>
 
+    <!-- THE DOJO — split feature -->
+    <section class="max-w-7xl mx-auto px-8 py-24">
+      <div class="hairline mb-20" style="opacity: 0.5;"></div>
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+        <div class="md:col-span-5 reveal">
+          <div class="eyebrow mb-6">The Dojo</div>
+          <h2 class="font-display ink" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.03em;">
+            A <span class="font-serif italic" style="color: var(--c-gold);">way place</span> held by the forest.
+          </h2>
+          <p class="mt-8 text-base sm:text-lg leading-[1.8]" style="color: var(--c-ink-soft); opacity: 0.95;">
+            A small yurt at the edge of the cedars. A wood floor that holds breath, sweat, and song.
+            Built simply, by hand, with intention — quiet, warm, and shaped by the people who pass through.
+          </p>
+          <a href="#" class="inline-flex items-center gap-2 mt-10 text-sm uppercase ink" style="letter-spacing: 0.28em; text-decoration: none; border-bottom: 1px solid var(--c-gold); padding-bottom: 4px;">
+            Visit the Space
+            <span class="gold">→</span>
+          </a>
+        </div>
+        <div class="md:col-span-7 reveal">
+          <figure class="photo-card ar-3-2">
+            <img src="images/space-exterior.jpg" alt="The yurt and cabin entry surrounded by cedars and morning light." loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFERINGS — three columns -->
+    <section class="max-w-7xl mx-auto px-8 py-16">
+      <div class="text-center mb-16 reveal">
+        <div class="eyebrow mb-6">Offerings</div>
+        <h2 class="font-display ink" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; letter-spacing: -0.03em;">
+          Three doorways. <span class="font-serif italic gold">One fire.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="#" class="card-light p-10 reveal" style="text-decoration: none;">
+          <div class="text-xs uppercase gold mb-8" style="letter-spacing: 0.32em;">01</div>
+          <h3 class="font-display ink mb-4" style="font-size: 1.75rem; letter-spacing: -0.02em;">Breathwork</h3>
+          <p class="text-sm leading-[1.7]" style="color: var(--c-ink-soft); opacity: 0.9;">
+            Group ceremonies, couples sessions, and private one-on-ones.
+            A direct path through the body, into the heart.
+          </p>
+          <div class="mt-10 text-xs uppercase ink" style="letter-spacing: 0.28em;">Explore →</div>
+        </a>
+        <a href="#" class="card-light p-10 reveal" style="text-decoration: none;">
+          <div class="text-xs uppercase gold mb-8" style="letter-spacing: 0.32em;">02</div>
+          <h3 class="font-display ink mb-4" style="font-size: 1.75rem; letter-spacing: -0.02em;">Martial Arts</h3>
+          <p class="text-sm leading-[1.7]" style="color: var(--c-ink-soft); opacity: 0.9;">
+            The warrior's path — discipline, presence, and embodied strength.
+            For those ready to meet what comes.
+          </p>
+          <div class="mt-10 text-xs uppercase ink" style="letter-spacing: 0.28em;">Explore →</div>
+        </a>
+        <a href="#" class="card-light p-10 reveal" style="text-decoration: none;">
+          <div class="text-xs uppercase gold mb-8" style="letter-spacing: 0.32em;">03</div>
+          <h3 class="font-display ink mb-4" style="font-size: 1.75rem; letter-spacing: -0.02em;">Ceremony</h3>
+          <p class="text-sm leading-[1.7]" style="color: var(--c-ink-soft); opacity: 0.9;">
+            Held space for life's threshold moments.
+            First responders, couples, and those returning home to themselves.
+          </p>
+          <div class="mt-10 text-xs uppercase ink" style="letter-spacing: 0.28em;">Explore →</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="max-w-4xl mx-auto px-8 py-28 text-center">
+      <span class="quote-mark mb-2">"</span>
+      <p class="font-serif italic ink reveal"
+         style="font-size: clamp(1.6rem, 3.2vw, 2.5rem); line-height: 1.4; font-weight: 400;">
+        The ancient fire is the sacred flame within.
+        <span class="navy" style="opacity: 0.7;">The place we are returning to.</span>
+      </p>
+      <div class="mt-10 reveal">
+        <div class="hairline w-24 mx-auto mb-6" style="opacity: 0.5;"></div>
+        <div class="text-xs uppercase slate" style="letter-spacing: 0.32em;">Amber &amp; Jesse Blue</div>
+      </div>
+    </section>
+
+    <!-- GALLERY STRIP -->
+    <section class="max-w-7xl mx-auto px-8 py-12">
+      <div class="flex items-end justify-between mb-12 reveal">
+        <div>
+          <div class="eyebrow mb-5">Gallery</div>
+          <h2 class="font-display ink" style="font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.05; letter-spacing: -0.03em;">
+            From the land &amp; <span class="font-serif italic gold">the practice.</span>
+          </h2>
+        </div>
+        <a href="#" class="hidden md:inline-flex text-xs uppercase ink" style="letter-spacing: 0.32em; text-decoration: none; border-bottom: 1px solid var(--c-gold); padding-bottom: 4px;">
+          See all →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-4">
+        <figure class="photo-card md:col-span-2 md:row-span-2 ar-3-4 reveal">
+          <img src="images/gallery-breathe.jpg" alt="Breathe — ocean water." loading="lazy" />
+        </figure>
+        <figure class="photo-card md:col-span-4 ar-16-10 reveal">
+          <img src="images/space-exterior.jpg" alt="Approach to the dojo." loading="lazy" />
+        </figure>
+        <figure class="photo-card md:col-span-2 ar-1-1 reveal">
+          <img src="images/group-flame.jpg" alt="Circle around firelight." loading="lazy" />
+        </figure>
+        <figure class="photo-card md:col-span-2 ar-1-1 reveal">
+          <img src="images/couples-breath.jpg" alt="Couples breathwork." loading="lazy" />
+        </figure>
+        <figure class="photo-card photo-placeholder md:col-span-2 ar-1-1 reveal">
+          <div class="ph-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>
+            </svg>
+          </div>
+          <div class="ph-label">Altar &amp; offerings</div>
+          <div class="ph-meta">Image to come</div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- VISIT / CTA -->
+    <section class="max-w-3xl mx-auto px-8 py-28 text-center">
+      <div class="hairline mb-16" style="opacity: 0.5;"></div>
+      <div class="eyebrow mb-8 reveal">Visit</div>
+      <h2 class="reveal font-display ink"
+          style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.03em;">
+        The door is open <span class="font-serif italic gold">by invitation.</span>
+      </h2>
+      <p class="reveal mt-10 text-base sm:text-lg leading-[1.8] navy" style="opacity: 0.8;">
+        We host small groups and private sessions on Salt Spring Island.
+        Reach out to find a date that suits you.
+      </p>
+      <div class="reveal mt-12 flex items-center justify-center gap-4 flex-wrap">
+        <a href="#" class="pill-ink">Reach Us</a>
+        <a href="#" class="pill-ghost">See Offerings</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="max-w-7xl mx-auto px-8 pt-16 pb-12">
+      <div class="hairline mb-12" style="opacity: 0.5;"></div>
+      <div class="grid md:grid-cols-3 gap-8 items-start">
+        <div>
+          <div class="font-display ink" style="font-size: 1.5rem; letter-spacing: -0.02em;">Ancient Fire</div>
+          <p class="mt-3 text-sm leading-[1.7] slate" style="max-width: 28ch;">
+            A living dojo on Salt Spring Island.
+          </p>
+        </div>
+        <div class="md:text-center text-xs uppercase slate leading-[1.9]" style="letter-spacing: 0.22em;">
+          We acknowledge that we are on the <br class="hidden sm:block"/>
+          traditional territories of the <br class="hidden sm:block"/>
+          Coast Salish Peoples.
+        </div>
+        <div class="md:text-right text-xs uppercase slate leading-[1.9]" style="letter-spacing: 0.22em;">
+          108 Walker Hook Road <br/>
+          Salt Spring Island, BC <br/>
+          info@ancientfire.ca
+        </div>
+      </div>
+      <div class="mt-12 text-xs uppercase slate text-center" style="letter-spacing: 0.32em; opacity: 0.7;">
+        © 2026 · Ancient Fire
+      </div>
+    </footer>
+
   </div>
 
-
-  <!-- Mobile menu sheet -->
+  <!-- Mobile sheet -->
   <div id="af-mobile-sheet" class="af-mobile-sheet" data-open="false" aria-hidden="true">
-    <a href="/">Home</a>
-    <a href="/offerings">Offerings</a>
-    <a href="/about">About</a>
-    <a href="/who-we-are">Who We Are</a>
-    <a href="/testimonials">Testimonials</a>
-    <a href="/audio">Audio</a>
-    <a href="/reach-us">Reach Us</a>
+    <a href="#">Home</a>
+    <a href="#">Offerings</a>
+    <a href="#">About</a>
+    <a href="#">The Space</a>
+    <a href="#">Who We Are</a>
+    <a href="#">Testimonials</a>
+    <a href="#">Reach Us</a>
   </div>
+
   <script>
     (function(){
       const sheet = document.getElementById('af-mobile-sheet');
@@ -361,18 +623,24 @@
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         document.body.style.overflow = open ? 'hidden' : '';
       }
-      btn.addEventListener('click', () => {
-        const isOpen = sheet.getAttribute('data-open') === 'true';
-        setOpen(!isOpen);
-      });
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') setOpen(false);
-      });
-      sheet.addEventListener('click', e => {
-        if (e.target.tagName === 'A') setOpen(false);
-      });
+      btn.addEventListener('click', () => setOpen(sheet.getAttribute('data-open') !== 'true'));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+      sheet.addEventListener('click', e => { if (e.target.tagName === 'A') setOpen(false); });
+    })();
+
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(el => el.classList.add('is-in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
     })();
   </script>
-
 </body>
 </html>

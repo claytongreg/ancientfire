@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancient Fire — The Space</title>
+<meta name="description" content="A dojo on Salt Spring Island — yurt, cabin, and forest. The physical home of Ancient Fire's breathwork and ceremony.">
+<link rel="canonical" href="https://ancientfire.ca/space">
+<meta property="og:title" content="Ancient Fire — The Space">
+<meta property="og:description" content="A dojo on Salt Spring Island — yurt, cabin, and forest. The physical home of Ancient Fire's breathwork and ceremony.">
+<meta property="og:image" content="https://ancientfire.ca/images/space-exterior.jpg">
+<meta property="og:url" content="https://ancientfire.ca/space">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ancient Fire">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ancient Fire — The Space">
+<meta name="twitter:description" content="A dojo on Salt Spring Island — yurt, cabin, and forest. The physical home of Ancient Fire's breathwork and ceremony.">
+<meta name="twitter:image" content="https://ancientfire.ca/images/space-exterior.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-background: hsl(36 50% 96%);
+    --color-foreground: hsl(24 11% 9%);
+    --color-muted-foreground: hsl(30 6% 32%);
+    --color-primary: #1c1917;
+    --color-primary-foreground: #eee6d4;
+    --color-border: #d4ccb8;
+    --font-display: 'Geist', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  /* -------- Mobile nav (matches about.html) -------- */
+  .af-mobile-toggle {
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    background: transparent; border: none;
+    cursor: pointer; padding: 0; margin: 0;
+    color: #1c1917;
+    position: relative; z-index: 60;
+  }
+  .af-mobile-toggle .bar {
+    display: block;
+    width: 22px; height: 1px;
+    background: currentColor;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+  }
+  .af-mobile-toggle .bar.t { transform: translate(-50%, -7px); }
+  .af-mobile-toggle .bar.b { transform: translate(-50%,  7px); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.t { transform: translate(-50%, 0) rotate(45deg); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.b { transform: translate(-50%, 0) rotate(-45deg); }
+  .af-mobile-toggle[aria-expanded="true"] .bar.m { opacity: 0; }
+
+  .af-mobile-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: hsla(24, 8%, 7%, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .af-mobile-sheet[data-open="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .af-mobile-sheet a {
+    display: block;
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    letter-spacing: -1px;
+    line-height: 1.3;
+    color: #1c1917;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  }
+  .af-mobile-sheet[data-open="true"] a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .af-mobile-sheet[data-open="true"] a:nth-child(1) { transition-delay: 0.10s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(2) { transition-delay: 0.14s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(3) { transition-delay: 0.18s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(4) { transition-delay: 0.22s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(5) { transition-delay: 0.26s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(6) { transition-delay: 0.30s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(7) { transition-delay: 0.34s; }
+  .af-mobile-sheet[data-open="true"] a:nth-child(8) { transition-delay: 0.38s; }
+  @media (max-width: 767px) { .af-mobile-toggle { display: inline-flex; } }
+  @media (min-width: 768px) { .af-mobile-sheet { display: none; } }
+</style>
+<style>
+  :root {
+    --background: 36 50% 96%;
+    --foreground: 24 11% 9%;
+    --muted-foreground: 30 6% 32%;
+    --border: 0 0% 18%;
+  }
+  html, body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ambient ember backdrop */
+  .ember-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 95%, hsla(22, 90%, 50%, 0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 100%, hsla(14, 85%, 40%, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse at 20% 10%, rgba(238, 230, 212, 0.7) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(243, 237, 224, 0.7) 0%, transparent 60%),
+      linear-gradient(180deg, #f3ede0 0%, #fbf8f0 45%, #f6f0e2 100%);
+  }
+  .ember-grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    opacity: 0.04; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  @keyframes ember-flicker {
+    0%, 100% { opacity: 0.85; } 40% { opacity: 1; } 60% { opacity: 0.7; }
+  }
+  .ember-flicker { animation: ember-flicker 5.5s ease-in-out infinite; }
+
+  /* Liquid glass (matches hero) */
+  .liquid-glass {
+    background: rgba(28, 25, 23, 0.02);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(28, 25, 23, 0.10);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer; color: #1c1917;
+  }
+  .liquid-glass::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: inherit; padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(28, 25, 23, 0.5) 0%, rgba(28, 25, 23, 0.14) 20%,
+      rgba(28, 25, 23, 0) 40%, rgba(28, 25, 23, 0) 60%,
+      rgba(28, 25, 23, 0.14) 80%, rgba(28, 25, 23, 0.5) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass:hover { transform: scale(1.03); }
+
+  /* HERO — full-bleed exterior */
+  .space-hero {
+    position: relative;
+    width: 100vw;
+    margin-left: 50%; transform: translateX(-50%);
+    height: clamp(560px, 88vh, 920px);
+    overflow: hidden;
+  }
+  .space-hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+    filter: saturate(0.55) sepia(0.35) hue-rotate(-12deg) contrast(1.05) brightness(0.85); mix-blend-mode: multiply; opacity: 0.9;
+    transform: scale(1.04);
+    animation: hero-slow-zoom 24s ease-in-out infinite alternate;
+  }
+  @keyframes hero-slow-zoom {
+    from { transform: scale(1.04); }
+    to   { transform: scale(1.10); }
+  }
+  .space-hero::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 60%, hsla(22, 60%, 30%, 0.18) 0%, transparent 60%),
+      linear-gradient(180deg,
+        rgba(243, 237, 224, 0.6) 0%,
+        rgba(28, 25, 23, 0.06) 35%,
+        hsla(24, 8%, 8%, 0.35) 70%,
+        rgba(251, 248, 240, 0.98) 100%);
+  }
+  .space-hero::after {
+    content: ''; position: absolute; inset: 0; z-index: 2;
+    opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .space-hero-caption {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+    padding: 0 2rem 4rem;
+  }
+
+  /* Hairline divider */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(28, 25, 23, 0.28) 50%, transparent 100%);
+  }
+  .hairline-vert {
+    width: 1px;
+    background: linear-gradient(180deg, transparent 0%, rgba(28, 25, 23, 0.28) 50%, transparent 100%);
+  }
+
+  /* Section eyebrow */
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Photo card */
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    background: hsl(24 6% 13%);
+    border: 1px solid rgba(28, 25, 23, 0.06);
+  }
+  .photo-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1), filter 1.4s ease;
+    filter: saturate(0.92) contrast(1.02);
+  }
+  .photo-card:hover img { transform: scale(1.04); filter: saturate(1) contrast(1.04); }
+  .photo-card .caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1.25rem 1.5rem 1.25rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0,0,0,0.78) 100%);
+    color: #1c1917;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Placeholder tile for photos not yet provided */
+  .photo-placeholder {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 55%, hsla(22, 70%, 22%, 0.3) 0%, transparent 65%),
+      linear-gradient(135deg, hsl(24 8% 13%) 0%, hsl(24 6% 10%) 100%);
+    border: 1px dashed rgba(255,255,255,0.10);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    color: hsl(var(--muted-foreground));
+    overflow: hidden;
+  }
+  .photo-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.08; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+  }
+  .photo-placeholder .ph-mark {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(28, 25, 23, 0.16);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    color: rgba(28, 25, 23, 0.5);
+  }
+  .photo-placeholder .ph-label {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.05rem;
+    color: hsl(0 0% 88%);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+  .photo-placeholder .ph-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.32);
+  }
+
+  /* Aspect ratios */
+  .ar-4-3   { aspect-ratio: 4 / 3; }
+  .ar-3-4   { aspect-ratio: 3 / 4; }
+  .ar-1-1   { aspect-ratio: 1 / 1; }
+  .ar-16-10 { aspect-ratio: 16 / 10; }
+  .ar-3-2   { aspect-ratio: 3 / 2; }
+
+  /* Animations */
+  @keyframes fade-rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-rise   { animation: fade-rise 0.9s ease-out both; }
+  .animate-fade-rise-1 { animation: fade-rise 0.9s ease-out 0.15s both; }
+  .animate-fade-rise-2 { animation: fade-rise 0.9s ease-out 0.30s both; }
+  .animate-fade-rise-3 { animation: fade-rise 0.9s ease-out 0.45s both; }
+  .animate-fade-rise-4 { animation: fade-rise 0.9s ease-out 0.60s both; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fade-in 1.2s ease-out both; }
+
+  /* Reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+
+  .font-display { font-family: 'Geist', sans-serif; }
+  .font-body    { font-family: 'Inter', sans-serif; }
+</style>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+  <div class="ember-bg" aria-hidden="true"></div>
+  <div class="ember-grain ember-flicker" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full">
+
+    <!-- NAV -->
+    <nav class="animate-fade-in">
+      <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-8 py-6">
+        <a href="/" class="text-3xl tracking-tight text-foreground font-display leading-none" style="font-family: 'Geist', sans-serif;">
+          Ancient Fire
+        </a>
+        <div class="hidden md:flex items-center gap-9">
+          <a href="/" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Home</a>
+          <a href="/offerings" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Offerings</a>
+          <a href="/about" class="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+          <a href="#" class="text-sm text-foreground transition-colors">The Space</a>
+          <a href="/who-we-are" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Who We Are</a>
+          <a href="/testimonials" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
+          <a href="/audio" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Audio</a>
+          <a href="/reach-us" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Reach Us</a>
+        </div>
+        <button class="liquid-glass rounded-full px-6 py-2.5 text-sm text-foreground hidden md:inline-flex">
+          Begin Journey
+        </button>
+        <button id="af-mobile-toggle" class="af-mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="af-mobile-sheet">
+          <span class="bar t" aria-hidden="true"></span>
+          <span class="bar m" aria-hidden="true"></span>
+          <span class="bar b" aria-hidden="true"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO — exterior -->
+    <header class="relative w-full pt-6">
+      <div class="space-hero">
+        <img src="images/space-exterior.jpg" alt="The dojo on Salt Spring Island — yurt and cabin entry, surrounded by forest." />
+        <div class="space-hero-caption">
+          <div class="max-w-7xl mx-auto">
+            <div class="animate-fade-rise section-eyebrow mb-5" style="color: rgba(28, 25, 23, 0.75);">The Space</div>
+            <h1 class="animate-fade-rise-1 font-display font-normal text-5xl sm:text-7xl md:text-8xl text-foreground"
+                style="font-family: 'Geist', sans-serif; line-height: 0.95; letter-spacing: -2.46px; max-width: 18ch;">
+              The dojo, <em class="not-italic" style="color: rgba(255,255,255,0.62);">held by the forest.</em>
+            </h1>
+            <div class="animate-fade-rise-2 mt-7 flex items-center gap-5 sm:gap-8 text-xs sm:text-sm uppercase text-foreground/85"
+                 style="letter-spacing: 0.32em;">
+              <span>Salt Spring Island</span>
+              <span class="h-px w-6 sm:w-10 bg-foreground/30" aria-hidden="true"></span>
+              <span>British Columbia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- OPENING PROSE -->
+    <section class="max-w-3xl mx-auto px-8 pt-20 sm:pt-28 pb-16">
+      <div class="hairline mb-16"></div>
+
+      <p class="reveal font-display text-3xl sm:text-4xl md:text-5xl leading-[1.15] text-foreground"
+         style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px;">
+        A small <em class="not-italic text-muted-foreground">yurt</em> at the edge of the cedars.
+        A wood floor that holds breath, sweat, and song.
+      </p>
+
+      <p class="reveal mt-12 text-base sm:text-lg leading-[1.8] text-muted-foreground">
+        The dojo was built simply, by hand, with intention. There is space for ten or so to lie down in a circle,
+        a small altar, a wood stove for the cold months, and tall windows that let the trees in.
+        It is not a studio. It is a <span class="text-foreground">way place</span> — quiet, warm,
+        and shaped by the people who pass through it.
+      </p>
+    </section>
+
+    <!-- EXTERIOR DETAIL — split layout -->
+    <section class="max-w-6xl mx-auto px-8 py-12 sm:py-20">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+        <div class="md:col-span-5 reveal">
+          <div class="section-eyebrow mb-8">Exterior</div>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.6px;">
+            A clearing in the cedars.
+          </h2>
+          <p class="mt-8 text-base sm:text-lg leading-[1.8] text-muted-foreground">
+            The yurt sits at the end of a short forest path, set among old growth and stump rings.
+            A small porch, a bench, room to take your shoes off and arrive slowly.
+          </p>
+          <p class="mt-6 text-base sm:text-lg leading-[1.8] text-muted-foreground">
+            Most arrivals begin here — a long breath at the threshold,
+            then the soft sound of the door.
+          </p>
+        </div>
+        <div class="md:col-span-7 reveal">
+          <figure class="photo-card ar-3-2">
+            <img src="images/space-exterior.jpg" alt="The yurt and cabin entry surrounded by cedars and morning light." loading="lazy" />
+            <figcaption class="caption">Yurt &amp; cabin entry · morning</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERIOR — placeholder -->
+    <section class="max-w-6xl mx-auto px-8 py-12 sm:py-20">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+        <div class="md:col-span-7 md:order-1 order-2 reveal">
+          <figure class="photo-card photo-placeholder ar-3-2">
+            <div class="ph-mark" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <rect x="3" y="5" width="18" height="14" rx="1.2"/>
+                <circle cx="9" cy="11" r="1.6"/>
+                <path d="M3 17l5-4 4 3 4-5 5 5"/>
+              </svg>
+            </div>
+            <div class="ph-label">Interior — image to come</div>
+            <div class="ph-meta">Yurt floor · altar · woodstove</div>
+          </figure>
+        </div>
+        <div class="md:col-span-5 md:order-2 order-1 reveal">
+          <div class="section-eyebrow mb-8">Interior</div>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.6px;">
+            Soft floor. <em class="not-italic text-muted-foreground">Warm light.</em>
+          </h2>
+          <p class="mt-8 text-base sm:text-lg leading-[1.8] text-muted-foreground">
+            Inside: cedar walls, a wood stove, blankets and bolsters laid out in a circle,
+            and a small altar at the heart of the room. The ceiling rises into the yurt's center crown —
+            a single skylight that tracks the sun across the day.
+          </p>
+          <p class="mt-6 text-base sm:text-lg leading-[1.8] text-muted-foreground">
+            It holds about ten in ceremony, more for sit-down practice.
+            Tea after. Quiet on the way out.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="max-w-7xl mx-auto px-8 pt-12 pb-24">
+      <div class="hairline mb-16"></div>
+
+      <div class="flex items-end justify-between mb-12 reveal">
+        <div>
+          <div class="section-eyebrow mb-5">Gallery</div>
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -0.6px; max-width: 22ch;">
+            Moments from <em class="not-italic text-muted-foreground">the land,</em> the practice, the people.
+          </h2>
+        </div>
+        <div class="hidden md:block text-xs uppercase text-muted-foreground/70" style="letter-spacing: 0.32em;">
+          More to come
+        </div>
+      </div>
+
+      <!-- Mosaic grid: 6 cells, mixed sizes -->
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-4">
+
+        <!-- 1. BREATHE — tall feature -->
+        <figure class="photo-card md:col-span-2 md:row-span-2 ar-3-4 reveal">
+          <img src="images/gallery-breathe.jpg" alt="Ocean water with the word BREATHE." loading="lazy" />
+          <figcaption class="caption">Breathe</figcaption>
+        </figure>
+
+        <!-- 2. exterior wide -->
+        <figure class="photo-card md:col-span-4 ar-16-10 reveal">
+          <img src="images/space-exterior.jpg" alt="The dojo from the path." loading="lazy" />
+          <figcaption class="caption">Approach · forest path</figcaption>
+        </figure>
+
+        <!-- 3. group flame (existing asset) -->
+        <figure class="photo-card md:col-span-2 ar-1-1 reveal">
+          <img src="images/group-flame.jpg" alt="A group gathered around a flame." loading="lazy" />
+          <figcaption class="caption">Circle · firelight</figcaption>
+        </figure>
+
+        <!-- 4. couples-breath (existing) -->
+        <figure class="photo-card md:col-span-2 ar-1-1 reveal">
+          <img src="images/couples-breath.jpg" alt="Two people in breathwork." loading="lazy" />
+          <figcaption class="caption">Practice · together</figcaption>
+        </figure>
+
+        <!-- 5. placeholder — interior altar -->
+        <figure class="photo-card photo-placeholder md:col-span-3 ar-3-2 reveal">
+          <div class="ph-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M5 21V8l7-5 7 5v13"/>
+              <path d="M9 21v-6h6v6"/>
+            </svg>
+          </div>
+          <div class="ph-label">Altar &amp; offerings</div>
+          <div class="ph-meta">Image to come</div>
+        </figure>
+
+        <!-- 6. placeholder — wide forest -->
+        <figure class="photo-card photo-placeholder md:col-span-3 ar-3-2 reveal">
+          <div class="ph-mark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M12 2l4 6h-3v6h-2V8H8z"/>
+              <path d="M12 14l5 8H7z"/>
+            </svg>
+          </div>
+          <div class="ph-label">Cedars &amp; trail</div>
+          <div class="ph-meta">Image to come</div>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- VISIT / CTA -->
+    <section class="max-w-3xl mx-auto px-8 py-20 text-center">
+      <div class="hairline mb-16"></div>
+      <div class="section-eyebrow mb-8 reveal">Visit</div>
+      <h2 class="reveal font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.1]"
+          style="font-family: 'Geist', sans-serif; letter-spacing: -0.5px;">
+        The door is open <em class="not-italic text-muted-foreground">by invitation.</em>
+      </h2>
+      <p class="reveal mt-10 text-base sm:text-lg leading-[1.8] text-muted-foreground max-w-2xl mx-auto">
+        We host small groups and private sessions on Salt Spring Island.
+        Reach out to find a date that suits you, or to ask about visiting the space first.
+      </p>
+      <div class="reveal mt-12 flex items-center justify-center gap-4 flex-wrap">
+        <a href="/reach-us" class="liquid-glass rounded-full px-7 py-3 text-sm">
+          Reach Us
+        </a>
+        <a href="/offerings" class="text-sm uppercase text-muted-foreground hover:text-foreground transition-colors px-2"
+           style="letter-spacing: 0.28em;">
+          See Offerings →
+        </a>
+      </div>
+    </section>
+
+    <!-- LAND ACKNOWLEDGMENT -->
+    <footer class="max-w-3xl mx-auto px-8 pt-16 pb-20 text-center">
+      <div class="hairline mb-12"></div>
+      <p class="text-xs sm:text-sm uppercase text-muted-foreground/80 leading-relaxed"
+         style="letter-spacing: 0.22em;">
+        We acknowledge that we are on the traditional territories <br class="hidden sm:block"/>
+        of the Coast Salish Peoples.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Mobile menu sheet -->
+  <div id="af-mobile-sheet" class="af-mobile-sheet" data-open="false" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/offerings">Offerings</a>
+    <a href="/about">About</a>
+    <a href="/space">The Space</a>
+    <a href="/who-we-are">Who We Are</a>
+    <a href="/testimonials">Testimonials</a>
+    <a href="/audio">Audio</a>
+    <a href="/reach-us">Reach Us</a>
+  </div>
+  <script>
+    (function(){
+      const sheet = document.getElementById('af-mobile-sheet');
+      const btn = document.getElementById('af-mobile-toggle');
+      if (!sheet || !btn) return;
+      function setOpen(open){
+        sheet.setAttribute('data-open', open ? 'true' : 'false');
+        sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      btn.addEventListener('click', () => {
+        const isOpen = sheet.getAttribute('data-open') === 'true';
+        setOpen(!isOpen);
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+      sheet.addEventListener('click', e => {
+        if (e.target.tagName === 'A') setOpen(false);
+      });
+    })();
+
+    /* Reveal on scroll */
+    (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(el => el.classList.add('is-in'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+    })();
+  </script>
+</body>
+</html>
