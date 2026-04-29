@@ -758,7 +758,7 @@
             Sessions
           </h2>
         </div>
-        <div class="hidden md:block text-xs meta-label">Weekly class + private sessions</div>
+        <div class="hidden md:block text-xs meta-label">Group class + private sessions</div>
       </div>
 
             <!-- FEATURED: WEEKLY CLASS -->
@@ -768,26 +768,22 @@
         </div>
         <div class="featured-body">
           <div class="flex items-center gap-4 mb-4 flex-wrap">
-            <span class="meta-label">Weekly · Public</span>
-            <span class="disc"></span>
-            <span class="meta-label" id="next-session-label">Next session — Saturday</span>
+            <span class="meta-label">Public · Coming Soon</span>
           </div>
           <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-foreground mb-5"
               style="font-family: 'Geist', sans-serif; letter-spacing: -1px; line-height: 1.02;">
-            Ancient Fire Weekly<br/>
+            Ancient Fire<br/>
             <em class="not-italic text-muted-foreground">Public Breathwork Class.</em>
           </h3>
           <p class="max-w-xl text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">
-            Saturdays, 6:00–8:00pm. Drop into a sanctuary of breath, sound, and community — every week on Salt Spring Island.
+            Drop into a sanctuary of breath, sound, and community — on Salt Spring Island. New schedule coming soon.
           </p>
           <div class="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm text-muted-foreground">
-            <span><span class="text-foreground">6:00–8:00</span> pm</span>
-            <span>·</span>
             <span>Book now <span class="text-foreground">$40</span></span>
             <span>·</span>
             <span>Sliding scale <span class="text-foreground">$30–$40</span> cash at the door</span>
           </div>
-          <span class="arrow-link">More Info &amp; Calendar <span class="arrow">→</span></span>
+          <span class="arrow-link">More Info <span class="arrow">→</span></span>
         </div>
       </a>
 
@@ -980,11 +976,11 @@
   (function(){
     const OFFERINGS = {
       group: {
-        eyebrow: "Weekly · Public Class",
-        title: "Ancient Fire Weekly<br/><em class='not-italic text-muted-foreground'>Public Breathwork Class.</em>",
+        eyebrow: "Public · Coming Soon",
+        title: "Ancient Fire<br/><em class='not-italic text-muted-foreground'>Public Breathwork Class.</em>",
         img: "images/group-flame.jpg",
         meta: [
-          { label: "When",     value: "Saturdays &middot; 6:00&ndash;8:00 pm" },
+          { label: "When",     value: "New schedule coming soon" },
           { label: "Where",    value: "108 Walker Hook Road<br/>Salt Spring Island, BC" },
           { label: "Offering", value: "Book now $40 &middot; Sliding scale $30&ndash;$40 cash at the door. Space is limited — please arrive early." }
         ],
@@ -1115,62 +1111,12 @@
       }
     };
 
-    
-    // --- Upcoming Sessions ---
-    // Compute next 6 Saturdays at 6-8pm from today. Each row has placeholder
-    // eventbrite URL and a "reserve" action. Replace URLs when events go live.
-    function nextSaturdays(n) {
-      const out = [];
-      const now = new Date();
-      // Find next Saturday (including today if today IS Saturday & before 6pm)
-      let d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const dow = d.getDay(); // 0=Sun, 6=Sat
-      let diff = (6 - dow + 7) % 7;
-      if (diff === 0) {
-        // today is Saturday — if it's already past 6pm, push to next week
-        if (now.getHours() >= 20) diff = 7;
-      }
-      d.setDate(d.getDate() + diff);
-      for (let i = 0; i < n; i++) {
-        out.push(new Date(d));
-        d.setDate(d.getDate() + 7);
-      }
-      return out;
-    }
-    function formatSessionDate(d) {
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      return months[d.getMonth()] + ' ' + d.getDate();
-    }
-    function buildCalendarHTML() {
-      const saturdays = nextSaturdays(6);
-      const rows = saturdays.map(d => {
-        const dateStr = formatSessionDate(d);
-        const ymd = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-        return `
-          <div class="session-row">
-            <div>
-              <div class="session-date">${dateStr}</div>
-              <div class="session-day">Saturday · 6–8 pm</div>
-            </div>
-            <a class="session-reserve" href="/reach-us">Reserve my space</a>
-            <a class="session-book" href="https://www.eventbrite.com/o/ancient-fire" target="_blank" rel="noopener">
-              Book Now <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        `;
-      }).join('');
-      return `<h3 class="section-title">Upcoming Sessions</h3>
-        <div class="af-calendar">${rows}</div>
-        <p class="af-cal-note">Tickets via Eventbrite. Or reserve your space directly and pay cash at the door.</p>`;
-    }
 
-    // Update the "next session" label on the featured card
-    (function updateNextSessionLabel(){
-      const el = document.getElementById('next-session-label');
-      if (!el) return;
-      const next = nextSaturdays(1)[0];
-      el.textContent = 'Next session — Saturday, ' + formatSessionDate(next);
-    })();
+    // --- Upcoming Sessions ---
+    function buildCalendarHTML() {
+      return `<h3 class="section-title">Upcoming Sessions</h3>
+        <p class="af-cal-note">New schedule coming soon. Reach out to reserve your space.</p>`;
+    }
 
     const modal    = document.getElementById('af-modal');
     const modalImg = document.getElementById('af-modal-img');
