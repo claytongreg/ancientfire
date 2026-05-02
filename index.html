@@ -77,7 +77,11 @@
     color: #0E2A4F; text-decoration: none;
     padding: 0.5rem 0;
   }
-  @media (max-width: 767px) { .af-mobile-toggle { display: inline-flex; } }
+  @media (max-width: 767px) {
+    .af-mobile-toggle { display: inline-flex; }
+    /* Hide the desktop "Begin Journey" pill on mobile — it crowds the nav */
+    nav .pill-ink { display: none; }
+  }
   @media (min-width: 768px) { .af-mobile-sheet { display: none; } }
 </style>
 <style>
@@ -413,9 +417,9 @@
         </div>
 
         <h1 class="animate-fade-rise-1 font-display font-normal ink"
-            style="font-size: clamp(2.5rem, 5vw, 5rem); line-height: 0.95; letter-spacing: -0.05em; white-space: nowrap;">
-          Gather <span class="font-serif italic gold" style="font-weight: 400;">·</span>
-          Inspire <span class="font-serif italic gold" style="font-weight: 400;">·</span>
+            style="font-size: clamp(2rem, 7vw, 5rem); line-height: 1; letter-spacing: -0.05em; text-wrap: balance;">
+          Gather <span class="font-serif italic gold" style="font-weight: 400; font-size: 0.6em; vertical-align: 0.18em;">·</span>
+          Inspire <span class="font-serif italic gold" style="font-weight: 400; font-size: 0.6em; vertical-align: 0.18em;">·</span>
           Thrive
         </h1>
 
