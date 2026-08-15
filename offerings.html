@@ -13,10 +13,51 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ancient Fire">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ancient Fire — Offerings">
-<meta name="twitter:description" content="Explore breathwork ceremonies, private sessions, couples work, and seasonal retreats at Ancient Fire on Salt Spring Island.">
-<meta name="twitter:image" content="https://ancientfire.ca/images/offerings-hero.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="twitter:title" content="Ancient Fire — Offerings">
+  <meta name="twitter:description" content="Explore breathwork ceremonies, private sessions, couples work, and seasonal retreats at Ancient Fire on Salt Spring Island.">
+  <meta name="twitter:image" content="https://ancientfire.ca/images/offerings-hero.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Breathwork and Vocal Freedom at 108",
+    "description": "An outdoor ceremony with breathwork by Ancient Fire and vocal freedom facilitated by Blair Francis. All are welcome.",
+    "image": "https://ancientfire.ca/images/breathwork-vocal-freedom-aug23.jpg",
+    "startDate": "2026-08-23T12:00:00-07:00",
+    "endDate": "2026-08-23T15:00:00-07:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "108",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "108 Walker's Hook Road",
+        "addressLocality": "Salt Spring Island",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      }
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://ancientfire.ca/offerings#august-23-event",
+      "priceCurrency": "CAD",
+      "lowPrice": "40",
+      "highPrice": "60",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Ancient Fire",
+      "url": "https://ancientfire.ca"
+    },
+    "performer": {
+      "@type": "Person",
+      "name": "Blair Francis"
+    }
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@tailwindcss/browser@4.1.3/dist/index.global.js"></script>
@@ -616,6 +657,67 @@
     .featured-body { padding: 3rem 3rem 3rem; align-self: center; }
   }
 
+  /* Featured seasonal event */
+  .seasonal-event-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    border: 1px solid rgba(28, 25, 23, 0.1);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .seasonal-event-card:hover {
+    border-color: rgba(28, 25, 23, 0.22);
+    box-shadow: 0 24px 50px -35px rgba(28, 25, 23, 0.5);
+    transform: translateY(-4px);
+  }
+  .seasonal-event-poster {
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    background: #e9e1d1;
+  }
+  .seasonal-event-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.7s ease;
+  }
+  .seasonal-event-card:hover .seasonal-event-poster img { transform: scale(1.015); }
+  .seasonal-event-card:hover .arrow-link { border-color: rgba(28, 25, 23, 0.7); }
+  .seasonal-event-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 6vw, 4.5rem);
+  }
+  .seasonal-event-meta {
+    display: grid;
+    gap: 0.85rem;
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(28, 25, 23, 0.12);
+    border-bottom: 1px solid rgba(28, 25, 23, 0.12);
+    color: hsl(var(--muted-foreground));
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .seasonal-event-meta strong {
+    display: inline-block;
+    min-width: 5.25rem;
+    color: hsl(var(--foreground));
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 768px) {
+    .seasonal-event-card { grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr); }
+  }
+
   /* Upcoming sessions calendar (inside modal) */
   .af-calendar {
     display: grid;
@@ -903,25 +1005,31 @@
         <div class="hidden md:block text-xs meta-label">Upcoming gatherings</div>
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-10 md:gap-14">
-
-        <div class="animate-fade-rise-2" style="border: 1px solid rgba(14, 42, 79, 0.1); border-radius: 4px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 24px;">
-          <div class="section-eyebrow mb-3" style="color: rgba(14, 42, 79, 0.35);">Stay Tuned</div>
-          <h3 class="font-display text-4xl sm:text-5xl leading-[1] tracking-tight"
-              style="font-family: 'Geist', sans-serif; color: rgba(14, 42, 79, 0.3);">
-            Coming Soon
-          </h3>
+      <a href="#" id="august-23-event" data-modal="breathworkVocalFreedom"
+         class="seasonal-event-card animate-fade-rise-2">
+        <div class="seasonal-event-poster">
+          <img src="images/breathwork-vocal-freedom-aug23.jpg"
+               alt="Breathwork and Vocal Freedom at 108 event poster"
+               loading="lazy"/>
         </div>
-
-        <div class="animate-fade-rise-3" style="border: 1px solid rgba(14, 42, 79, 0.1); border-radius: 4px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 24px;">
-          <div class="section-eyebrow mb-3" style="color: rgba(14, 42, 79, 0.35);">Stay Tuned</div>
-          <h3 class="font-display text-4xl sm:text-5xl leading-[1] tracking-tight"
-              style="font-family: 'Geist', sans-serif; color: rgba(14, 42, 79, 0.3);">
-            Coming Soon
+        <div class="seasonal-event-body">
+          <div class="section-eyebrow mb-5">Sunday · August 23 · 2026</div>
+          <h3 class="font-display text-4xl sm:text-5xl md:text-6xl text-foreground"
+              style="font-family: 'Geist', sans-serif; letter-spacing: -1px; line-height: 1.02;">
+            Breathwork &amp;<br/>
+            <em class="not-italic text-muted-foreground">Vocal Freedom at 108.</em>
           </h3>
+          <p class="mt-6 text-muted-foreground text-base sm:text-lg leading-relaxed">
+            An outdoor ceremony immersed in nature, with Ancient Fire and Blair Francis. All are welcome.
+          </p>
+          <div class="seasonal-event-meta">
+            <div><strong>When</strong> 12–3pm</div>
+            <div><strong>Where</strong> 108 Walker's Hook Road, Salt Spring Island</div>
+            <div><strong>Offering</strong> Sliding scale $40–$60</div>
+          </div>
+          <span class="arrow-link">Event Details <span class="arrow">→</span></span>
         </div>
-
-      </div>
+      </a>
     </section>
 
     <!-- INVITATION -->
@@ -1022,6 +1130,31 @@
           }
         ],
         cta: { label: "Reach Us to Book", href: "/reach-us" }
+      },
+
+      breathworkVocalFreedom: {
+        eyebrow: "Outdoor Ceremony · August 23, 2026",
+        title: "Breathwork &amp;<br/><em class='not-italic text-muted-foreground'>Vocal Freedom at 108.</em>",
+        img: "images/breathwork-vocal-freedom-aug23.jpg",
+        meta: [
+          { label: "When", value: "Sunday, August 23 &middot; 12&ndash;3pm" },
+          { label: "Where", value: "108 Walker's Hook Road, Salt Spring Island" },
+          { label: "Offering", value: "Sliding scale $40&ndash;$60 &middot; cash or e-transfer" }
+        ],
+        lead: "Gather, inspire, and thrive in an outdoor ceremony immersed in nature.",
+        body: [
+          "Ancient Fire will guide the breathwork journey, joined by Blair Francis for vocal freedom. The gathering is outdoors and weather pending. All are welcome &mdash; come as you are.",
+          "Please bring a water bottle, comfortable clothing, and a yoga mat or pillow."
+        ],
+        sections: [
+          {
+            title: "Payment",
+            items: [
+              "Cash at the gathering, or e-transfer to Ancientfire@startmail.com."
+            ]
+          }
+        ],
+        cta: { label: "Email to Reserve", href: "mailto:Ancientfire@startmail.com?subject=Breathwork%20and%20Vocal%20Freedom%20at%20108" }
       },
 
       private: {
